@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { ArrowDown, Download } from "lucide-react"
-import { BackgroundLines } from "@/components/ui/background-lines"
+import { Button } from "@/components/ui/button";
+import { ArrowDown, Download } from "lucide-react";
+import { BackgroundLines } from "@/components/ui/background-lines";
 
 export const HeroSection = () => {
   return (
@@ -14,22 +14,14 @@ export const HeroSection = () => {
           </h1>
 
           <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed font-light font-[family-name:var(--font-geist-sans)]">
-            I am a mobile application developer with 1+ year experience building cool applications with React Native and
-            Flutter.
+            I am a mobile application developer with 1+ year experience building cool applications with React Native and Flutter.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button
-              size="lg"
-              className="bg-white text-black hover:bg-white/90 px-8 py-3 font-medium font-[family-name:var(--font-geist-sans)]"
-            >
+            <Button size="lg" className="bg-white text-black hover:bg-white/90 px-8 py-3 font-medium font-[family-name:var(--font-geist-sans)]">
               View My Work
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white/30 text-white hover:bg-white/5 px-8 py-3 font-medium font-[family-name:var(--font-geist-sans)]"
-            >
+            <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/5 px-8 py-3 font-medium font-[family-name:var(--font-geist-sans)]">
               <Download className="mr-2 h-4 w-4" />
               Download Resume
             </Button>
@@ -41,5 +33,5 @@ export const HeroSection = () => {
         </div>
       </BackgroundLines>
     </section>
-  )
-}
+  );
+};

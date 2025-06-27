@@ -1,23 +1,28 @@
 "use client"
 
-export const AnimatedDotBackground = () => {
+import { cn } from "@/lib/utils"
+import "@/App.css"
+
+export function AnimatedDotBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
-      <div className="absolute inset-0">
-        {Array.from({ length: 50 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-blue-500/30 rounded-full animate-pulse"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${Math.random() * 3 + 2}s`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Animated dot background */}
+      <div
+        className={cn(
+          "absolute inset-0 animate-dots-move",
+          "[background-size:20px_20px]",
+          "[background-image:radial-gradient(#404040_1px,transparent_1px)]",
+        )}
+      />
+
+      {/* Radial gradient for the container to give a faded look */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)]"></div>
+
+      {/* Top blur fade */}
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-black/80 to-transparent"></div>
+
+      {/* Bottom blur fade */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
     </div>
   )
 }

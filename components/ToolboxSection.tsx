@@ -1,44 +1,95 @@
-import { Card, CardContent } from "@/components/ui/card"
 
-export const ToolboxSection = () => {
-  const tools = [
-    { name: "React Native", category: "Mobile Development", icon: "📱" },
-    { name: "Flutter", category: "Mobile Development", icon: "🦋" },
-    { name: "React", category: "Web Development", icon: "⚛️" },
-    { name: "Next.js", category: "Web Development", icon: "▲" },
-    { name: "TypeScript", category: "Programming Language", icon: "🔷" },
-    { name: "JavaScript", category: "Programming Language", icon: "💛" },
-    { name: "Firebase", category: "Backend", icon: "🔥" },
-    { name: "Node.js", category: "Backend", icon: "💚" },
-    { name: "MongoDB", category: "Database", icon: "🍃" },
-    { name: "PostgreSQL", category: "Database", icon: "🐘" },
-    { name: "Git", category: "Version Control", icon: "📝" },
-    { name: "Docker", category: "DevOps", icon: "🐳" },
+import { ToolBox } from "./ToolBox";
+
+interface Tool {
+  id: string
+  name: string
+  icon: string
+  url: string
+  category?: string
+}
+
+export default function ToolboxSection() {
+  const developmentTools: Tool[] = [
+    {
+      id: "1",
+      name: "VS Code",
+      icon: "https://code.visualstudio.com/assets/images/code-stable.png",
+      url: "https://code.visualstudio.com/",
+    },
+    {
+      id: "2",
+      name: "React",
+      icon: "https://reactjs.org/logo-og.png",
+      url: "https://reactjs.org/",
+    },
+    {
+      id: "3",
+      name: "Next.js",
+      icon: "https://nextjs.org/static/favicon/favicon-32x32.png",
+      url: "https://nextjs.org/",
+    },
+    {
+      id: "4",
+      name: "TypeScript",
+      icon: "https://www.typescriptlang.org/favicon-32x32.png",
+      url: "https://www.typescriptlang.org/",
+    },
+    {
+      id: "5",
+      name: "Tailwind",
+      icon: "https://tailwindcss.com/favicons/favicon-32x32.png",
+      url: "https://tailwindcss.com/",
+    },
+    {
+      id: "6",
+      name: "Figma",
+      icon: "https://static.figma.com/app/icon/1/favicon.png",
+      url: "https://www.figma.com/",
+    },
+    {
+      id: "7",
+      name: "GitHub",
+      icon: "https://github.com/favicon.ico",
+      url: "https://github.com/",
+    },
+    {
+      id: "8",
+      name: "Vercel",
+      icon: "https://vercel.com/favicon.ico",
+      url: "https://vercel.com/",
+    },
+    {
+      id: "9",
+      name: "Node.js",
+      icon: "https://nodejs.org/static/images/favicons/favicon-32x32.png",
+      url: "https://nodejs.org/",
+    },
+    {
+      id: "10",
+      name: "MongoDB",
+      icon: "https://www.mongodb.com/assets/images/global/favicon.ico",
+      url: "https://www.mongodb.com/",
+    },
+    {
+      id: "11",
+      name: "Prisma",
+      icon: "https://www.prisma.io/images/favicon-32x32.png",
+      url: "https://www.prisma.io/",
+    },
+    {
+      id: "12",
+      name: "Supabase",
+      icon: "https://supabase.com/favicon/favicon-32x32.png",
+      url: "https://supabase.com/",
+    },
   ]
 
   return (
-    <section className="py-20 px-6 bg-gray-900/30">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">My Toolbox</h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">Technologies and tools I use to bring ideas to life</p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {tools.map((tool, index) => (
-            <Card
-              key={index}
-              className="bg-gray-800/50 border-gray-700 hover:bg-gray-700/50 transition-all duration-300 hover:scale-105"
-            >
-              <CardContent className="p-6 text-center">
-                <div className="text-3xl mb-3">{tool.icon}</div>
-                <h3 className="text-white font-medium mb-1">{tool.name}</h3>
-                <p className="text-gray-400 text-sm">{tool.category}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
+    <ToolBox
+      tools={developmentTools}
+      title="My Toolbox"
+      subtitle="Hardware && software I keep in my development arsenal"
+    />
   )
 }
