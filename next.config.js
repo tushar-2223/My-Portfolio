@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  experimental: {
+    mdxRs: true,
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -7,10 +11,16 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["placeholder.svg"],
-    dangerouslyAllowSVG: true,
     unoptimized: true,
   },
 }
 
-module.exports = nextConfig
+const withMDX = require("@next/mdx")({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+})
+
+module.exports = withMDX(nextConfig)

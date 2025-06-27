@@ -3,6 +3,10 @@ import { Footer } from "@/components/Footer"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, Briefcase } from "lucide-react"
+import { AboutSection } from "@/components/AboutSection"
+import { GitHubStats } from "@/components/GitHubStats"
+import { SpotifySection } from "@/components/SpotifySection"
+import { BooksSection } from "@/components/BooksSection"
 
 export default function About() {
   const skills = [
@@ -41,14 +45,10 @@ export default function About() {
 
       <div className="pt-32 pb-20 px-6">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-              About Me
-            </h1>
-            <p className="text-gray-400 text-lg">
-              Get to know more about my journey, skills, and passion for development
-            </p>
-          </div>
+          <AboutSection />
+          <GitHubStats />
+          <SpotifySection />
+          <BooksSection />
 
           {/* Bio Section */}
           <Card className="bg-gray-900/50 border-gray-700 mb-12">

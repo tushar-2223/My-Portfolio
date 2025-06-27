@@ -9,7 +9,7 @@ export default function Projects() {
     {
       title: "E-Commerce Mobile App",
       description: "A full-featured mobile e-commerce application built with React Native and Firebase",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/placeholder.svg",
       technologies: ["React Native", "Firebase", "Redux"],
       github: "#",
       demo: "#",
@@ -17,7 +17,7 @@ export default function Projects() {
     {
       title: "Task Management Dashboard",
       description: "A collaborative task management tool with real-time updates and team collaboration features",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/placeholder.svg",
       technologies: ["React", "Node.js", "MongoDB"],
       github: "#",
       demo: "#",
@@ -25,7 +25,7 @@ export default function Projects() {
     {
       title: "Weather App",
       description: "A beautiful weather application with location-based forecasts and interactive maps",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/placeholder.svg",
       technologies: ["Flutter", "OpenWeather API", "Dart"],
       github: "#",
       demo: "#",
@@ -33,7 +33,7 @@ export default function Projects() {
     {
       title: "Social Media Dashboard",
       description: "Analytics dashboard for social media management with data visualization",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/placeholder.svg",
       technologies: ["Next.js", "Chart.js", "PostgreSQL"],
       github: "#",
       demo: "#",
@@ -41,7 +41,7 @@ export default function Projects() {
     {
       title: "Portfolio Website",
       description: "Personal portfolio website with modern design and smooth animations",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/placeholder.svg",
       technologies: ["React", "TypeScript", "Tailwind CSS"],
       github: "#",
       demo: "#",
@@ -49,7 +49,7 @@ export default function Projects() {
     {
       title: "Chat Application",
       description: "Real-time chat application with private messaging and group chats",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/placeholder.svg",
       technologies: ["React", "Socket.io", "Express"],
       github: "#",
       demo: "#",
@@ -85,26 +85,25 @@ export default function Projects() {
                 <CardContent>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded-md text-sm">
+                      <span
+                        key={techIndex}
+                        className="px-2 py-1 text-xs bg-gray-800/50 rounded border border-gray-700/50 text-gray-400"
+                      >
                         {tech}
                       </span>
                     ))}
                   </div>
                   <div className="flex gap-2">
                     <Button
-                      variant="outline"
                       size="sm"
-                      className="flex-1 border-gray-600 text-gray-300 hover:bg-gray-700"
+                      variant="outline"
+                      className="border-gray-600 text-gray-300 hover:bg-white/5 bg-transparent"
                     >
-                      <Github className="mr-2 h-4 w-4" />
+                      <Github className="h-4 w-4 mr-2" />
                       Code
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 border-gray-600 text-gray-300 hover:bg-gray-700"
-                    >
-                      <ExternalLink className="mr-2 h-4 w-4" />
+                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                      <ExternalLink className="h-4 w-4 mr-2" />
                       Demo
                     </Button>
                   </div>

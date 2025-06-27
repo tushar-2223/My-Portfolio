@@ -1,4 +1,3 @@
-
 import { Timeline } from "@/components/ui/timeline";
 
 export const TimelineSection = () => {

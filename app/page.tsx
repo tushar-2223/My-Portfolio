@@ -4,8 +4,8 @@ import { BlogSection } from "@/components/BlogSection"
 import { ContactSection } from "@/components/ContactSection"
 import { Footer } from "@/components/Footer"
 import { Button } from "@/components/ui/button"
-import { ProjectSection } from "@/components/ProjectSection"
-import { ToolboxSection } from "@/components/ToolboxSection"
+import ProjectSection from "@/components/ProjectSection"
+import ToolboxSection from "@/components/ToolboxSection"
 import Link from "next/link"
 
 const Index = () => {

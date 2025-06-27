@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
+import Link from "next/link"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, ArrowLeft } from "lucide-react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { Calendar, Clock, ArrowLeft, TableIcon as TableOfContents } from "lucide-react"
 
 const BlogPost = () => {
   const { id } = useParams()
@@ -75,35 +75,155 @@ const MyComponent: React.FC<Props> = ({ title, children }) => {
 };
 \`\`\`
 
+### Custom Hooks
+Extract logic into custom hooks for reusability:
+
+\`\`\`typescript
+const useCounter = (initialValue: number = 0) => {
+  const [count, setCount] = useState(initialValue);
+  
+  const increment = () => setCount(prev => prev + 1);
+  const decrement = () => setCount(prev => prev - 1);
+  const reset = () => setCount(initialValue);
+  
+  return { count, increment, decrement, reset };
+};
+\`\`\`
+
 ## State Management {#state}
 
-For state management, consider these modern approaches:
+State management in React can be handled in various ways depending on your application's complexity:
 
-### React Context
-For simple state sharing across components.
+### Local State with useState
+For simple component state:
 
-### Redux Toolkit
-For complex state management needs.
+\`\`\`typescript
+const [user, setUser] = useState<User | null>(null);
+\`\`\`
 
-### Zustand
-A lightweight alternative to Redux.
+### Context API
+For application-wide state:
+
+\`\`\`typescript
+const UserContext = createContext<UserContextType | undefined>(undefined);
+
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUser must be used within UserProvider');
+  }
+  return context;
+};
+\`\`\`
 
 ## Testing Strategies {#testing}
 
-Testing is crucial for maintaining code quality:
+Testing is an essential part of modern web development. Here's how to approach testing in React with TypeScript:
 
 ### Unit Testing
-Test individual components and functions.
+Test individual components and functions:
+
+\`\`\`typescript
+import { render, screen } from '@testing-library/react';
+import { MyComponent } from './MyComponent';
+
+test('renders component with title', () => {
+  render(<MyComponent title="Test Title" />);
+  expect(screen.getByText('Test Title')).toBeInTheDocument();
+});
+\`\`\`
 
 ### Integration Testing
-Test how components work together.
-
-### End-to-End Testing
-Test complete user workflows.
+Test component interactions and data flow.
 
 ## Conclusion {#conclusion}
 
-Building modern web applications with React and TypeScript provides a solid foundation for scalable, maintainable code. By following these best practices, you'll be well-equipped to handle complex projects.`,
+Building modern web applications requires careful consideration of architecture, tooling, and best practices. React and TypeScript provide a solid foundation, but the key is to follow established patterns and continuously refactor your code as your application grows.
+
+Remember to:
+- Keep components small and focused
+- Use TypeScript effectively for type safety
+- Write comprehensive tests
+- Follow React best practices
+- Stay updated with the latest developments in the ecosystem`,
+      date: "2024-01-15",
+      readTime: "8 min read",
+      tags: ["React", "TypeScript", "Web Development"],
+      author: "Tushar Pankhaniya",
+    },
+    {
+      id: 2,
+      title: "The Future of Frontend Development",
+      excerpt:
+        "Exploring upcoming trends and technologies that will shape the frontend development landscape in the coming years.",
+      content: `# The Future of Frontend Development
+
+## Table of Contents
+1. [Web Components](#web-components)
+2. [Server Components](#server-components)
+3. [AI in Development](#ai-development)
+4. [Performance Optimization](#performance)
+5. [The Road Ahead](#conclusion)
+
+## Web Components {#web-components}
+
+Web Components are becoming increasingly important in the modern frontend landscape. They provide a way to create reusable, encapsulated HTML elements that work across different frameworks and libraries.
+
+The three main technologies that make up Web Components are:
+- Custom Elements
+- Shadow DOM
+- HTML Templates
+
+\`\`\`javascript
+class MyCustomElement extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = '<h1>Hello, Web Components!</h1>';
+  }
+}
+
+customElements.define('my-custom-element', MyCustomElement);
+\`\`\`
+
+## Server Components {#server-components}
+
+Server-side rendering is making a comeback with technologies like Next.js App Router and React Server Components. This approach offers several benefits:
+
+- Improved initial page load times
+- Better SEO
+- Reduced JavaScript bundle sizes
+- Enhanced user experience
+
+## AI in Development {#ai-development}
+
+Artificial Intelligence is revolutionizing how we write code:
+
+### Code Generation
+AI tools like GitHub Copilot and ChatGPT are helping developers write code faster and more efficiently.
+
+### Automated Testing
+AI can help generate test cases and identify potential bugs before they reach production.
+
+### Design to Code
+Tools that convert design mockups directly to code are becoming more sophisticated.
+
+## Performance Optimization {#performance}
+
+Performance continues to be a critical factor in user experience:
+
+### Core Web Vitals
+- Largest Contentful Paint (LCP)
+- First Input Delay (FID)
+- Cumulative Layout Shift (CLS)
+
+### Modern Optimization Techniques
+- Tree shaking
+- Code splitting
+- Image optimization
+- Caching strategies
+
+## The Road Ahead {#conclusion}
+
+The future of frontend development is exciting and full of possibilities. As developers, we need to stay adaptable and continue learning new technologies while maintaining focus on user experience and performance.`,
       date: "2024-01-10",
       readTime: "6 min read",
       tags: ["Frontend", "Trends", "Technology"],
@@ -130,21 +250,30 @@ Next.js provides excellent image optimization out of the box with the Image comp
 \`\`\`typescript
 import Image from 'next/image';
 
-const MyComponent = () => (
+const OptimizedImage = () => (
   <Image
-    src="/my-image.jpg"
-    alt="Description"
-    width={500}
-    height={300}
+    src="/hero-image.jpg"
+    alt="Hero image"
+    width={800}
+    height={400}
     priority
+    placeholder="blur"
+    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ..."
   />
 );
 \`\`\`
 
+Benefits include:
+- Automatic format selection (WebP, AVIF)
+- Responsive images
+- Lazy loading by default
+- Blur placeholder support
+
 ## Code Splitting {#code-splitting}
 
-Dynamic imports help reduce bundle sizes:
+Proper code splitting can significantly improve load times:
 
+### Dynamic Imports
 \`\`\`typescript
 import dynamic from 'next/dynamic';
 
@@ -164,7 +293,7 @@ Static generation offers the best performance for most use cases:
 \`\`\`typescript
 export async function getStaticProps() {
   const data = await fetchData();
-
+  
   return {
     props: { data },
     revalidate: 3600 // Revalidate every hour
@@ -201,7 +330,7 @@ Regular monitoring helps identify performance bottlenecks and track improvements
     },
   ]
 
-  const post = blogPosts.find((p) => p.id === Number.parseInt(id || "1"))
+  const post = blogPosts.find((p) => p.id === Number.parseInt((id as string) || "1"))
 
   useEffect(() => {
     const handleScroll = () => {
@@ -225,21 +354,30 @@ Regular monitoring helps identify performance bottlenecks and track improvements
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
     }
   }
 
+  const tableOfContents = [
+    { id: "introduction", title: "Introduction" },
+    { id: "setup", title: "Development Environment" },
+    { id: "architecture", title: "Component Architecture" },
+    { id: "state", title: "State Management" },
+    { id: "testing", title: "Testing Strategies" },
+    { id: "conclusion", title: "Conclusion" },
+  ]
+
   if (!post) {
     return (
-      <div className="min-h-screen bg-black text-white">
-        <Header />
-        <div className="pt-32 pb-20 px-6 text-center">
-          <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Post not found</h1>
           <Link href="/blog">
-            <Button>Back to Blog</Button>
+            <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 bg-transparent">
+              Back to Blog
+            </Button>
           </Link>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -248,105 +386,124 @@ Regular monitoring helps identify performance bottlenecks and track improvements
     <div className="min-h-screen bg-black text-white">
       <Header />
 
-      <div className="pt-32 pb-20 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <Link href="/blog" className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Blog
-          </Link>
+      <div className="pt-24 pb-20">
+        <div className="container mx-auto px-6 max-w-7xl">
+          {/* Back Navigation */}
+          <div className="mb-8">
+            <Link href="/blog">
+              <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/5 p-0">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Blog
+              </Button>
+            </Link>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-            {/* Table of Contents - Sidebar */}
+            {/* Table of Contents - Modern Sidebar */}
             <div className="lg:col-span-1">
-              <div className="sticky top-32">
-                <h3 className="text-lg font-semibold text-white mb-4">Table of Contents</h3>
-                <nav className="space-y-2">
-                  <button
-                    onClick={() => scrollToSection("introduction")}
-                    className={`block text-left text-sm transition-colors ${
-                      activeSection === "introduction" ? "text-blue-400" : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    Introduction
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("setup")}
-                    className={`block text-left text-sm transition-colors ${
-                      activeSection === "setup" ? "text-blue-400" : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    Setting up the Development Environment
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("architecture")}
-                    className={`block text-left text-sm transition-colors ${
-                      activeSection === "architecture" ? "text-blue-400" : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    Component Architecture
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("state")}
-                    className={`block text-left text-sm transition-colors ${
-                      activeSection === "state" ? "text-blue-400" : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    State Management
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("testing")}
-                    className={`block text-left text-sm transition-colors ${
-                      activeSection === "testing" ? "text-blue-400" : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    Testing Strategies
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("conclusion")}
-                    className={`block text-left text-sm transition-colors ${
-                      activeSection === "conclusion" ? "text-blue-400" : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    Conclusion
-                  </button>
-                </nav>
+              <div className="sticky top-24">
+                <div className="p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm">
+                  <div className="flex items-center mb-6">
+                    <TableOfContents className="h-5 w-5 mr-2 text-white" />
+                    <h3 className="font-semibold text-white">Table of Contents</h3>
+                  </div>
+                  <nav className="space-y-1">
+                    {tableOfContents.map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => scrollToSection(item.id)}
+                        className={`block w-full text-left text-sm py-3 px-4 rounded-xl transition-all duration-200 border ${
+                          activeSection === item.id
+                            ? "bg-white text-black border-white font-medium"
+                            : "text-white/70 hover:text-white hover:bg-white/5 border-transparent hover:border-white/10"
+                        }`}
+                      >
+                        {item.title}
+                      </button>
+                    ))}
+                  </nav>
+                </div>
               </div>
             </div>
 
             {/* Main Content */}
             <div className="lg:col-span-3">
-              <article>
-                <header className="mb-12">
-                  <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">{post.title}</h1>
-
-                  <div className="flex items-center gap-4 text-gray-400 mb-6">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {new Date(post.date).toLocaleDateString()}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      {post.readTime}
-                    </div>
-                    <span>by {post.author}</span>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag, index) => (
-                      <Badge key={index} variant="secondary" className="bg-blue-500/20 text-blue-300">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </header>
-
-                <div className="prose prose-invert prose-lg max-w-none">
-                  <div
-                    dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, "<br />") }}
-                    className="text-gray-300 leading-relaxed"
-                  />
+              {/* Article Header */}
+              <div className="mb-12">
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {post.tags.map((tag, index) => (
+                    <Badge
+                      key={index}
+                      variant="secondary"
+                      className="bg-white/10 text-white hover:bg-white/20 border border-white/20 rounded-full px-4 py-1"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
-              </article>
+
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-white leading-tight tracking-tight">
+                  {post.title}
+                </h1>
+
+                <div className="flex items-center space-x-8 text-white/60 mb-8 text-sm">
+                  <div className="flex items-center">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="h-4 w-4 mr-2" />
+                    {post.readTime}
+                  </div>
+                  <div>By {post.author}</div>
+                </div>
+
+                <div className="h-px bg-white/10 w-full"></div>
+              </div>
+
+              {/* Article Content */}
+              <div className="p-8 md:p-12 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm">
+                <div
+                  className="prose prose-lg max-w-none prose-invert"
+                  dangerouslySetInnerHTML={{
+                    __html: post.content
+                      .replace(
+                        /## (.*?) \{#(.*?)\}/g,
+                        '<h2 id="$2" class="text-2xl font-semibold text-white mt-12 mb-6 pb-3 border-b border-white/10">$1</h2>',
+                      )
+                      .replace(/# (.*)/g, '<h1 class="text-3xl font-bold text-white mb-8">$1</h1>')
+                      .replace(/### (.*)/g, '<h3 class="text-xl font-semibold text-white mt-8 mb-4">$1</h3>')
+                      .replace(
+                        /```(\w+)?\n([\s\S]*?)```/g,
+                        '<pre class="bg-black/50 border border-white/10 p-6 rounded-xl overflow-x-auto my-6"><code class="text-white text-sm">$2</code></pre>',
+                      )
+                      .replace(
+                        /`([^`]+)`/g,
+                        '<code class="bg-black/30 border border-white/10 px-2 py-1 rounded text-white text-sm">$1</code>',
+                      )
+                      .replace(/\n\n/g, '</p><p class="mb-6 leading-relaxed text-white/80">')
+                      .replace(/^(?!<[h|p|c|u])(.+)$/gm, '<p class="mb-6 leading-relaxed text-white/80">$1</p>')
+                      .replace(/- (.+)/g, '<li class="text-white/80 mb-2">$1</li>')
+                      .replace(/(<li.*<\/li>)/s, '<ul class="list-disc list-inside mb-6 space-y-2 ml-4">$1</ul>'),
+                  }}
+                />
+              </div>
+
+              {/* Navigation */}
+              <div className="mt-12 flex justify-between items-center">
+                <Link href="/blog">
+                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 bg-transparent">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Blog
+                  </Button>
+                </Link>
+
+                <div className="text-white/50 text-sm">Share this article</div>
+              </div>
             </div>
           </div>
         </div>
