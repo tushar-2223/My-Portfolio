@@ -1,6 +1,8 @@
+// app/api/posts/route.ts
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
+import { NextResponse } from "next/server"
 
 export interface BlogPost {
   slug: string
@@ -16,7 +18,7 @@ export interface BlogPost {
 
 const postsDirectory = path.join(process.cwd(), "content/blog")
 
-export function getAllPosts(): BlogPost[] {
+function getAllPosts(): BlogPost[] {
   try {
     if (!fs.existsSync(postsDirectory)) {
       return []
@@ -55,46 +57,15 @@ export function getAllPosts(): BlogPost[] {
   }
 }
 
-export function getPostBySlug(slug: string): BlogPost | null {
+export async function GET() {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.mdx`)
-    if (!fs.existsSync(fullPath)) {
-      return null
-    }
-
-    const fileContents = fs.readFileSync(fullPath, "utf8")
-    const { data, content } = matter(fileContents)
-
-    // Calculate reading time
-    const wordCount = content.split(/\s+/).length
-    const readingTime = Math.ceil(wordCount / 200)
-
-    return {
-      slug,
-      title: data.title || "Untitled",
-      date: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
-      excerpt: data.excerpt || "",
-      content,
-      tags: data.tags || [],
-      author: data.author || "Tushar Pankhaniya",
-      image: data.image,
-      readingTime: `${readingTime} min read`,
-    }
+    const posts = getAllPosts()
+    return NextResponse.json(posts)
   } catch (error) {
-    console.error("Error reading blog post:", error)
-    return null
+    console.error("Error fetching posts:", error)
+    return NextResponse.json(
+      { error: "Failed to fetch posts" },
+      { status: 500 }
+    )
   }
-}
-
-export function extractTableOfContents(content: string) {
-  const headings = content.match(/^#{2,3}\s+(.+)$/gm) || []
-  return headings.map((heading) => {
-    const level = heading.match(/^#+/)?.[0].length || 2
-    const text = heading.replace(/^#+\s+/, "")
-    const id = text
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "")
-    return { level, text, id }
-  })
 }

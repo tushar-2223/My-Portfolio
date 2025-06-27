@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Calendar, Clock, User } from "lucide-react"
 import Link from "next/link"
-import { getAllPosts } from "@/lib/blog"
+import { fetchAllPosts } from "@/lib/blog-utils"
 
 export const BlogSection = () => {
-  const posts = getAllPosts().slice(0, 3)
+  const posts = fetchAllPosts();
 
   return (
     <section id="blog" className="py-20 px-6">
