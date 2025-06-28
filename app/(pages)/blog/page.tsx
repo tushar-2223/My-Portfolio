@@ -1,33 +1,9 @@
 // app/blog/page.tsx
 import Link from "next/link"
 import Image from "next/image"
-import { BlogPost } from "@/lib/blog-utils"
-
-// Server-side data fetching
-async function getBlogPosts(): Promise<BlogPost[]> {
-  try {
-    // Get the base URL for API calls
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NODE_ENV === 'production'
-        ? 'https://your-domain.com' // Replace with your actual domain
-        : 'http://localhost:3000'
-    
-    const res = await fetch(`${baseUrl}/api/posts`, {
-      // Revalidate every 10 minutes
-      next: { revalidate: 600 }
-    })
-    
-    if (!res.ok) {
-      throw new Error('Failed to fetch posts')
-    }
-    
-    return res.json()
-  } catch (error) {
-    console.error('Error fetching posts:', error)
-    return []
-  }
-}
+import { BlogPost, getBlogPosts } from "@/lib/blog-utils"
+import { Header } from "@/components/Header"
+import { Footer } from "@/components/Footer"
 
 export default async function BlogPage() {
   const posts = await getBlogPosts()
@@ -38,7 +14,7 @@ export default async function BlogPage() {
         <h1 className="text-4xl font-bold mb-8">Blog</h1>
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
           <p className="text-yellow-800">
-            No blog posts found. Create some MDX files in the /content/blog directory.
+            No blog posts found.
           </p>
         </div>
       </div>
@@ -46,19 +22,28 @@ export default async function BlogPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Blog</h1>
-        <p className="text-gray-600 text-lg">
-          Latest thoughts and insights on web development, technology, and more.
-        </p>
-      </header>
-      
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <BlogCard key={post.slug} post={post} />
-        ))}
+    <div className="min-h-screen bg-black">
+      <Header />
+
+      <div className="container mx-auto max-w-6xl">
+        <div className="flex items-center mb-16">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+              Latest Blog Posts
+            </h2>
+            <p className="text-gray-400 text-lg">Thoughts, tutorials, and insights about web development</p>
+          </div>
+
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <BlogCard key={post.slug} post={post} />
+          ))}
+        </div>
       </div>
+
+      <Footer />
     </div>
   )
 }
@@ -78,12 +63,12 @@ function BlogCard({ post }: { post: BlogPost }) {
           />
         </div>
       )}
-      
+
       <div className="p-6">
         <div className="flex flex-wrap gap-2 mb-3">
           {post.tags.slice(0, 2).map((tag) => (
-            <span 
-              key={tag} 
+            <span
+              key={tag}
               className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium"
             >
               {tag}
@@ -95,20 +80,20 @@ function BlogCard({ post }: { post: BlogPost }) {
             </span>
           )}
         </div>
-        
+
         <Link href={`/blog/${post.slug}`} className="group">
           <h2 className="text-xl font-semibold mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
             {post.title}
           </h2>
         </Link>
-        
+
         <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
-        
+
         <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
           <span className="font-medium">By {post.author}</span>
           <span className="bg-gray-100 px-2 py-1 rounded">{post.readingTime}</span>
         </div>
-        
+
         <time className="text-sm text-gray-500 block mb-4">
           {new Date(post.date).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -116,12 +101,12 @@ function BlogCard({ post }: { post: BlogPost }) {
             day: 'numeric'
           })}
         </time>
-        
-        <Link 
+
+        <Link
           href={`/blog/${post.slug}`}
           className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
         >
-          Read more 
+          Read more
           <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>

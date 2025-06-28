@@ -4,16 +4,18 @@ import { Badge } from "@/components/ui/badge";
 import { Star, GitFork, ExternalLink } from "lucide-react";
 import { fetchGitHubUser, fetchGitHubRepos } from "@/services/github";
 
-export const GitHubStats = () => {
-  const { data: user } = useQuery({
-    queryKey: ['github-user'],
-    queryFn: fetchGitHubUser,
-  });
+const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME!
 
-  const { data: repos } = useQuery({
-    queryKey: ['github-repos'],
-    queryFn: fetchGitHubRepos,
-  });
+export const GitHubStats = () => {
+ const { data: user } = useQuery({
+  queryKey: ['github-user', username],
+  queryFn: () => fetchGitHubUser(username),
+})
+
+const { data: repos } = useQuery({
+  queryKey: ['github-repos', username],
+  queryFn: () => fetchGitHubRepos(username),
+})
 
   return (
     <section id="github" className="py-20 px-6">
@@ -60,7 +62,7 @@ export const GitHubStats = () => {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6 text-center">
                 <div className="text-2xl font-bold text-white mb-2">
-                  {user.public_gists}
+                  {user.public_repos}
                 </div>
                 <div className="text-white/60 text-sm">Gists</div>
               </CardContent>

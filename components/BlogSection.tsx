@@ -3,10 +3,14 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Calendar, Clock, User } from "lucide-react"
 import Link from "next/link"
-import { fetchAllPosts } from "@/lib/blog-utils"
+import { fetchAllPosts,getBlogPosts } from "@/lib/blog-utils"
 
-export const BlogSection = () => {
-  const posts = fetchAllPosts();
+export async function BlogSection() {
+  const posts = await getBlogPosts();
+
+   if (posts.length === 0) {
+     return;
+  }
 
   return (
     <section id="blog" className="py-20 px-6">
@@ -36,7 +40,7 @@ export const BlogSection = () => {
                       src={post.image || "/placeholder.svg"}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
+                    />l̥
                   </div>
                 )}
 
