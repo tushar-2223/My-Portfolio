@@ -20,7 +20,7 @@ export const SpotifySection = () => {
 
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-transparent to-gray-900/30">
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-600 bg-clip-text text-transparent">
             Currently Vibing To
