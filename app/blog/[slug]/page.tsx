@@ -2,8 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, User, ArrowLeft, Share2 } from "lucide-react"
@@ -53,7 +52,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
+      
 
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-6 max-w-4xl">
@@ -201,7 +200,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
         </div>
       </div>
 
-      <Footer />
+      
     </div>
   )
 }

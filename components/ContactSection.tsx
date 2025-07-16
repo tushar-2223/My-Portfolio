@@ -1,13 +1,13 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { CardWithCorners } from "@/components/ui/card-with-corners"
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Loader2 } from "lucide-react"
+import { toast } from "sonner"
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -17,11 +17,38 @@ export const ContactSection = () => {
     subject: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Handle form submission here
+    setIsSubmitting(true)
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        toast.success("Message sent successfully!")
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          subject: "",
+          message: "",
+        })
+      } else {
+        toast.error("Failed to send message. Please try again later.")
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      toast.error("An unexpected error occurred. Please try again later.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -56,7 +83,8 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">Email</p>
-                    <p className="text-white/60">hello@example.com</p>
+                    {/* TODO: Replace with your actual email */}
+                    <p className="text-white/60">your-email@example.com</p>
                   </div>
                 </div>
 
@@ -66,6 +94,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">Phone</p>
+                    {/* TODO: Replace with your actual phone number */}
                     <p className="text-white/60">+1 (555) 123-4567</p>
                   </div>
                 </div>
@@ -76,6 +105,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">Location</p>
+                    {/* TODO: Replace with your actual location */}
                     <p className="text-white/60">San Francisco, CA</p>
                   </div>
                 </div>
@@ -84,6 +114,7 @@ export const ContactSection = () => {
               <div className="mt-8 pt-8 border-t border-white/10">
                 <p className="text-white font-medium mb-4">Follow Me</p>
                 <div className="flex space-x-4">
+                  {/* TODO: Replace with your actual social media links */}
                   <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
                     <Github className="h-5 w-5 text-white" />
                   </a>
@@ -117,6 +148,7 @@ export const ContactSection = () => {
                     placeholder="John"
                     className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div>
@@ -132,6 +164,7 @@ export const ContactSection = () => {
                     placeholder="Doe"
                     className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
@@ -149,6 +182,7 @@ export const ContactSection = () => {
                   placeholder="john@example.com"
                   className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -165,6 +199,7 @@ export const ContactSection = () => {
                   placeholder="Project Inquiry"
                   className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -181,12 +216,17 @@ export const ContactSection = () => {
                   rows={5}
                   className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20 resize-none"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3">
-                <Send className="mr-2 h-4 w-4" />
-                Send Message
+              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="mr-2 h-4 w-4" />
+                )}
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </CardWithCorners>

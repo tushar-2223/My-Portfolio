@@ -2,22 +2,12 @@
 
 import { Github, Linkedin, Twitter, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react"
 import Link from "next/link"
+import { VisitorCounter } from "./VisitorCounter"
 
 export const Footer = () => {
-  const [visitCount, setVisitCount] = useState(0)
-
-  useEffect(() => {
-    // Simulate visitor count - in a real app, you'd track this properly
-    const count = localStorage.getItem("visitCount")
-    const newCount = count ? Number.parseInt(count) + 1 : 1
-    setVisitCount(newCount)
-    localStorage.setItem("visitCount", newCount.toString())
-  }, [])
-
   return (
-    <footer className="border-t border-white/20">
+    <footer className="border-t border-white/20 bg-black">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
@@ -67,7 +57,7 @@ export const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
                 <span className="text-white/60">Total Visits</span>
-                <span className="text-white font-semibold">{visitCount.toLocaleString()}</span>
+                <VisitorCounter />
               </div>
               <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
                 <span className="text-white/60">Last Updated</span>

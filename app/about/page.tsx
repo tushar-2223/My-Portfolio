@@ -1,5 +1,4 @@
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, Briefcase } from "lucide-react"
@@ -7,6 +6,12 @@ import { AboutSection } from "@/components/AboutSection"
 import { GitHubStats } from "@/components/GitHubStats"
 import { SpotifySection } from "@/components/SpotifySection"
 import { BooksSection } from "@/components/BooksSection"
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Tushar Pankhaniya",
+  description: "Learn more about Tushar Pankhaniya, his skills, experience, and journey as a mobile application developer.",
+};
 
 export default function About() {
   const skills = [
@@ -41,7 +46,6 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
 
       <div className="pt-32 pb-20 px-6">
         <div className="container mx-auto max-w-4xl">
@@ -120,7 +124,6 @@ export default function About() {
         </div>
       </div>
 
-      <Footer />
     </div>
   )
 }

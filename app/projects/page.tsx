@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Github, ExternalLink } from "lucide-react"
@@ -190,7 +189,7 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
+      
 
       <div className="pt-32 pb-20 px-6">
         <div className="container mx-auto max-w-6xl">
@@ -212,7 +211,7 @@ export default function Projects() {
         </div>
       </div>
 
-      <Footer />
+      
     </div>
   )
 }

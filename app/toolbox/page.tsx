@@ -1,6 +1,11 @@
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+
 import { ToolBox } from "@/components/ToolBox"
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tushar Pankhaniya's Toolbox",
+  description: "A list of hardware and software that Tushar Pankhaniya uses daily.",
+};
 
 export default function Toolbox() {
   const tools = [
@@ -104,7 +109,7 @@ export default function Toolbox() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
+      
 
       <div className="pt-32 pb-20">
         <div className="text-center mb-16 px-6">
@@ -117,7 +122,7 @@ export default function Toolbox() {
         <ToolBox tools={tools} title="Applications" subtitle="" />
       </div>
 
-      <Footer />
+      
     </div>
   )
 }

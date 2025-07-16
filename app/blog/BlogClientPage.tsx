@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
+
+
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -140,7 +140,7 @@ export default function BlogClientPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white">
-        <Header />
+        
         <div className="pt-24 pb-20">
           <div className="container mx-auto px-6 max-w-6xl">
             <div className="text-center mb-16">
@@ -172,14 +172,14 @@ export default function BlogClientPage() {
             </div>
           </div>
         </div>
-        <Footer />
+        
       </div>
     )
   }
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
+      
 
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-6 max-w-6xl">
@@ -224,7 +224,7 @@ export default function BlogClientPage() {
         </div>
       </div>
 
-      <Footer />
+      
     </div>
   )
 }

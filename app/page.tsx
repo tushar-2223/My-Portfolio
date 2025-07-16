@@ -1,8 +1,7 @@
-import { Header } from "@/components/Header"
+
 import { HeroSection } from "@/components/HeroSection"
 import { BlogSection } from "@/components/BlogSection"
 import { ContactSection } from "@/components/ContactSection"
-import { Footer } from "@/components/Footer"
 import { Button } from "@/components/ui/button"
 import ProjectSection from "@/components/ProjectSection"
 import ToolboxSection from "@/components/ToolboxSection"
@@ -11,12 +10,11 @@ import Link from "next/link"
 const Index = () => {
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
       <HeroSection />
 
       {/* Brief About Me Section */}
       <section className="py-20 px-6">
-        <div className="container mx-auto max-w-4xl text-center">
+        <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
             About Me
           </h2>
@@ -35,7 +33,6 @@ const Index = () => {
       <ToolboxSection />
       <BlogSection />
       <ContactSection />
-      <Footer />
     </div>
   )
 }

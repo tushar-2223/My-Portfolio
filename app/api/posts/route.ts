@@ -16,26 +16,23 @@ export interface BlogPost {
   readingTime: string
 }
 
-const postsDirectory = path.join(process.cwd(), "content/blog")
+const postsDirectory = path.resolve(process.cwd(), "content/blog")
 
 function getAllPosts(): BlogPost[] {
+  const postsDirectory = path.resolve(process.cwd(), "content/blog");
   try {
-    if (!fs.existsSync(postsDirectory)) {
-      return []
-    }
-
-    const fileNames = fs.readdirSync(postsDirectory)
+    const fileNames = fs.readdirSync(postsDirectory);
     const allPostsData = fileNames
       .filter((fileName) => fileName.endsWith(".mdx"))
       .map((fileName) => {
-        const slug = fileName.replace(/\.mdx$/, "")
-        const fullPath = path.join(postsDirectory, fileName)
-        const fileContents = fs.readFileSync(fullPath, "utf8")
-        const { data, content } = matter(fileContents)
+        const slug = fileName.replace(/\.mdx$/, "");
+        const fullPath = path.join(postsDirectory, fileName);
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+        const { data, content } = matter(fileContents);
 
         // Calculate reading time (rough estimate: 200 words per minute)
-        const wordCount = content.split(/\s+/).length
-        const readingTime = Math.ceil(wordCount / 200)
+        const wordCount = content.split(/\s+/).length;
+        const readingTime = Math.ceil(wordCount / 200);
 
         return {
           slug,
@@ -47,25 +44,26 @@ function getAllPosts(): BlogPost[] {
           author: data.author || "Tushar Pankhaniya",
           image: data.image,
           readingTime: `${readingTime} min read`,
-        }
-      })
+        };
+      });
 
-    return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1))
-  } catch (error) {
-    console.error("Error reading blog posts:", error)
-    return []
+    return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+  } catch (error: any) {
+    console.error("Error reading blog posts:", error);
+    // Throw a more informative error
+    throw new Error(`Failed to read blog posts from ${postsDirectory}. Error: ${error.message}`);
   }
 }
 
 export async function GET() {
   try {
-    const posts = getAllPosts()
-    return NextResponse.json(posts)
-  } catch (error) {
-    console.error("Error fetching posts:", error)
+    const posts = getAllPosts();
+    return NextResponse.json(posts);
+  } catch (error: any) {
+    console.error("Error fetching posts:", error);
     return NextResponse.json(
-      { error: "Failed to fetch posts" },
+      { error: "Failed to fetch posts", details: error.message },
       { status: 500 }
-    )
+    );
   }
 }
