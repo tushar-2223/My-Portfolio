@@ -62,18 +62,18 @@ export const ContactSection = () => {
     <section id="contact" className="py-20 px-6 bg-black">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
             Get In Touch
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Have a project in mind? Let's work together to bring your ideas to life.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Info */}
-          <div className="space-y-8">
-            <CardWithCorners className="p-8">
+          <div className="space-y-8 h-full">
+            <CardWithCorners className="p-8 h-full">
               <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
 
               <div className="space-y-6">
@@ -83,8 +83,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">Email</p>
-                    {/* TODO: Replace with your actual email */}
-                    <p className="text-white/60">your-email@example.com</p>
+                    <p className="text-white/60">pankhaniyatushar9@gmail.com</p>
                   </div>
                 </div>
 
@@ -94,8 +93,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">Phone</p>
-                    {/* TODO: Replace with your actual phone number */}
-                    <p className="text-white/60">+1 (555) 123-4567</p>
+                    <p className="text-white/60">+91 9313346569</p>
                   </div>
                 </div>
 
@@ -105,8 +103,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">Location</p>
-                    {/* TODO: Replace with your actual location */}
-                    <p className="text-white/60">San Francisco, CA</p>
+                    <p className="text-white/60">Anand, Gujarat, India</p>
                   </div>
                 </div>
               </div>
@@ -130,106 +127,113 @@ export const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <CardWithCorners className="p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">Send Message</h3>
+          <div className="h-full">
+            <CardWithCorners className="p-8 h-full">
+              <h3 className="text-2xl font-bold text-white mb-6">Send Message</h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-white/80 mb-2">
+                      First Name
+                    </label>
+                    <Input
+                      id="firstName"
+                      name="firstName"
+                      type="text"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      placeholder="John"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
+                      required
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-white/80 mb-2">
+                      Last Name
+                    </label>
+                    <Input
+                      id="lastName"
+                      name="lastName"
+                      type="text"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      placeholder="Doe"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
+                      required
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                </div>
+
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-white/80 mb-2">
-                    First Name
+                  <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
+                    Email
                   </label>
                   <Input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    value={formData.firstName}
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
                     onChange={handleChange}
-                    placeholder="John"
+                    placeholder="john@example.com"
                     className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
+
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-white/80 mb-2">
-                    Last Name
+                  <label htmlFor="subject" className="block text-sm font-medium text-white/80 mb-2">
+                    Subject
                   </label>
                   <Input
-                    id="lastName"
-                    name="lastName"
+                    id="subject"
+                    name="subject"
                     type="text"
-                    value={formData.lastName}
+                    value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Doe"
+                    placeholder="Project Inquiry"
                     className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
-              </div>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="john@example.com"
-                  className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
+                    Message
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell me about your project..."
+                    rows={5}
+                    className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20 resize-none"
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-white/80 mb-2">
-                  Subject
-                </label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="Project Inquiry"
-                  className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell me about your project..."
-                  rows={5}
-                  className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20 resize-none"
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <Send className="mr-2 h-4 w-4" />
-                )}
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
-            </form>
-          </CardWithCorners>
+                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <Send className="mr-2 h-4 w-4" />
+                  )}
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            </CardWithCorners>
+          </div>
+        </div>
+        <div className="mt-20 pt-8 border-t border-white/10 text-center">
+          <p className="text-gray-500">
+            &copy; {new Date().getFullYear()} Tushar Pankhaniya. All rights reserved.
+          </p>
         </div>
       </div>
     </section>

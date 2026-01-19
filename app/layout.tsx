@@ -5,6 +5,7 @@ import { Providers } from "@/components/providers"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { PageTransition } from "@/components/PageTransition"
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: "Tushar Pankhaniya - Mobile Application Developer",
@@ -45,6 +46,7 @@ export default function RootLayout({
             {children}
           </PageTransition>
           <Footer />
+          <Toaster />
         </Providers>
       </body>
     </html>

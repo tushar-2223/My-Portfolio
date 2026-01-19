@@ -1,60 +1,61 @@
 import { Card } from "@/components/ui/card";
 
 export const TechStackSection = () => {
-  const techStack = [
+  const categories = [
     {
-      category: "Frontend",
-      technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-      color: "from-blue-500 to-cyan-500"
+      title: "Mobile Tech Stack",
+      technologies: ["React Native", "Flutter", "Dart", "Swift", "Kotlin", "Expo", "Reanimated 3"],
+      class: "group-hover:bg-[#b087ff] group-hover:border-zinc-500", // Purple
     },
     {
-      category: "Backend",
-      technologies: ["Node.js", "Express", "Python", "Django", "PostgreSQL"],
-      color: "from-green-500 to-emerald-500"
+      title: "Web Tech Stack",
+      technologies: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5", "CSS3"],
+      class: "group-hover:bg-[#ffd074] group-hover:border-zinc-500", // Yellow
     },
     {
-      category: "Tools & Others",
-      technologies: ["Git", "Docker", "AWS", "Figma", "VS Code"],
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      category: "Mobile",
-      technologies: ["React Native", "Flutter", "Expo", "Firebase"],
-      color: "from-orange-500 to-red-500"
+      title: "Tools & Libraries",
+      technologies: ["Firebase", "Redux", "RxDart", "Google Gemini", "Git", "Figma", "VS Code"],
+      class: "group-hover:bg-blue-500 group-hover:border-blue-400", // Blue
     }
   ];
 
   return (
-    <section id="tech" className="py-20 px-6 bg-gradient-to-b from-transparent to-gray-900/30">
+    <section id="tech" className="py-20 px-6 bg-black">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
             Tech Stack
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Technologies and tools I work with
+            Technologies I use to build seamless experiences
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {techStack.map((stack, index) => (
-            <Card key={index} className="p-6 bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-gray-700/50 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-              <div className="mb-4">
-                <h3 className={`text-xl font-semibold bg-gradient-to-r ${stack.color} bg-clip-text text-transparent`}>
-                  {stack.category}
-                </h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {stack.technologies.map((tech, techIndex) => (
-                  <span
-                    key={techIndex}
-                    className="px-3 py-1 text-sm bg-gray-800/50 rounded-full border border-gray-700/50 text-gray-300"
-                  >
-                    {tech}
-                  </span>
+        <div className="space-y-20">
+          {categories.map((category, catIndex) => (
+            <div key={catIndex} className="flex flex-col items-center">
+              <h3 className="text-xl md:text-2xl font-semibold text-white/90 mb-8 tracking-wide">
+                {category.title}
+              </h3>
+
+              <div className="flex flex-wrap justify-center gap-6">
+                {category.technologies.map((tech, index) => (
+                  <div key={index} className="group inline-block text-center">
+                    <div className={`h-24 w-24 rounded-[20px] border border-zinc-800 bg-zinc-900/50 p-2 transition-all duration-500 group-hover:-translate-y-3 ${category.class.replace('group-hover:bg-[#b087ff]', 'group-hover:border-[#b087ff]').replace('group-hover:bg-[#ffd074]', 'group-hover:border-[#ffd074]').replace('group-hover:bg-blue-500', 'group-hover:border-blue-500')}`}>
+                      <div className="grid h-full place-items-center rounded-xl border border-white/5 bg-zinc-800/50 shadow-inner custom-inset-shadow">
+                        {/* Icon Placeholder */}
+                        <span className="text-2xl font-bold text-white/50 group-hover:text-white transition-colors duration-300">
+                          {tech.charAt(0)}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-sm text-gray-500 group-hover:text-gray-300 transition-colors duration-300 font-medium">
+                      {tech}
+                    </p>
+                  </div>
                 ))}
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>

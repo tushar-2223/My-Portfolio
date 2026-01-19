@@ -3,13 +3,12 @@
 import { Github, Linkedin, Twitter, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { VisitorCounter } from "./VisitorCounter"
 
 export const Footer = () => {
   return (
     <footer className="border-t border-white/20 bg-black">
       <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center text-center md:text-left">
           {/* Brand */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-white">Tushar Pankhaniya</h3>
@@ -51,24 +50,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Site Stats</h4>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
-                <span className="text-white/60">Total Visits</span>
-                <VisitorCounter />
-              </div>
-              <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
-                <span className="text-white/60">Last Updated</span>
-                <span className="text-white font-semibold">Today</span>
-              </div>
-              <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
-                <span className="text-white/60">Response Time</span>
-                <span className="text-white font-semibold">~24h</span>
-              </div>
-            </div>
-          </div>
+
         </div>
 
         <div className="border-t border-white/20 mt-12 pt-8">

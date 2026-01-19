@@ -1,19 +1,19 @@
 
 import { HeroSection } from "@/components/HeroSection"
-import { BlogSection } from "@/components/BlogSection"
 import { ContactSection } from "@/components/ContactSection"
-import { Button } from "@/components/ui/button"
 import ProjectSection from "@/components/ProjectSection"
-import ToolboxSection from "@/components/ToolboxSection"
-import Link from "next/link"
+import { TechStackSection } from "@/components/TechStackSection"
+import { AboutSection } from "@/components/AboutSection"
+import { ExperienceSection } from "@/components/ExperienceSection"
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       <HeroSection />
+      <AboutSection />
+      <ExperienceSection />
       <ProjectSection />
-      <ToolboxSection />
-      <BlogSection />
+      <TechStackSection />
       <ContactSection />
     </div>
   )
