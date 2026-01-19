@@ -27,14 +27,20 @@ export function extractTableOfContents(content: string) {
 // Client-side API fetching functions
 export async function fetchAllPosts(): Promise<BlogPost[]> {
   try {
-    const res = await fetch('/api/posts')
+    const res = await fetch('/api/posts', {
+      cache: 'no-store',
+      next: { revalidate: 60 } // Revalidate every 60 seconds
+    })
+    
     if (!res.ok) {
-      throw new Error('Failed to fetch posts')
+      const errorData = await res.json().catch(() => null);
+      throw new Error(errorData?.details || 'Failed to fetch posts')
     }
+    
     return res.json()
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching posts:', error)
-    return []
+    throw new Error(`Error fetching posts: ${error.message}`)
   }
 }
 

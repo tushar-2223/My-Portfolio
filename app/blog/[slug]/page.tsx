@@ -42,13 +42,15 @@ async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export default async function BlogPostPage({ params }: BlogPostProps) {
-  const post = await fetchBlogPost(params.slug)
+  // Await the params object before accessing its properties
+  const { slug } = await params;
+  const post = await fetchBlogPost(slug);
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
-  const tableOfContents = extractTableOfContents(post.content)
+  const tableOfContents = extractTableOfContents(post.content);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -206,13 +208,16 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
 }
 
 // Generate metadata for each post
-export async function generateMetadata({ params }: BlogPostProps) {
-  const post = await fetchBlogPost(params.slug)
+export async function generateMetadata({ params }: BlogPostProps) { 
+  // Await the params object before accessing its properties
+  const { slug } = await params;
+  const post = await fetchBlogPost(slug);
 
   if (!post) {
     return {
       title: "Post Not Found",
-    }
+      description: "The requested blog post could not be found.",
+    };
   }
 
   return {

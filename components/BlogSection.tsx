@@ -1,12 +1,35 @@
+'use client';
+
 import Link from "next/link"
 import { ArrowRight, Calendar, Clock, User } from "lucide-react"
 import { CardWithCorners } from "@/components/ui/card-with-corners"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { fetchAllPosts } from "@/lib/blog-utils"
+import { useEffect, useState } from "react"
 
-export async function BlogSection() {
-  const posts = (await fetchAllPosts()).slice(0, 3)
+export function BlogSection() {
+  const [posts, setPosts] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        setIsLoading(true)
+        const allPosts = await fetchAllPosts()
+        setPosts(allPosts.slice(0, 3))
+        setError(null)
+      } catch (err) {
+        console.error('Error loading posts:', err)
+        setError('Failed to load blog posts. Please try again later.')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadPosts()
+  }, [])
 
   return (
     <section id="blog" className="py-20 px-6 bg-black">
@@ -31,8 +54,22 @@ export async function BlogSection() {
           </Link>
         </div>
 
+        {/* Loading state */}
+        {isLoading && (
+          <div className="text-center py-20">
+            <p className="text-white/60 text-lg">Loading blog posts...</p>
+          </div>
+        )}
+
+        {/* Error state */}
+        {error && (
+          <div className="text-center py-20">
+            <p className="text-white/60 text-lg">{error}</p>
+          </div>
+        )}
+
         {/* Empty-state */}
-        {posts.length === 0 && (
+        {!isLoading && !error && posts.length === 0 && (
           <div className="text-center py-20">
             <p className="text-white/60 text-lg">
               No blog posts found. Add MDX files to{" "}
@@ -42,7 +79,8 @@ export async function BlogSection() {
         )}
 
         {/* Posts grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {!isLoading && !error && posts.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
               <CardWithCorners className="group cursor-pointer h-full hover:scale-105 transition-all duration-300 hover:border-white/40">
@@ -111,7 +149,8 @@ export async function BlogSection() {
               </CardWithCorners>
             </Link>
           ))}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   )

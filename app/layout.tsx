@@ -1,12 +1,10 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import "./globals.css"
 import { Providers } from "@/components/providers"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
-
-const inter = Inter({ subsets: ["latin"] })
+import { PageTransition } from "@/components/PageTransition"
 
 export const metadata: Metadata = {
   title: "Tushar Pankhaniya - Mobile Application Developer",
@@ -40,10 +38,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="font-inter">
         <Providers>
           <Header />
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
           <Footer />
         </Providers>
       </body>

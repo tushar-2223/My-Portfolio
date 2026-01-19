@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X, Github, Linkedin, Twitter } from "lucide-react"
+import { Menu, X, Github, Linkedin, Twitter, TwitterIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -19,7 +20,6 @@ export const Header = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
     { name: "Blogs", href: "/blog" },
     { name: "Toolbox", href: "/toolbox" },
@@ -42,19 +42,30 @@ export const Header = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => (
-                <Link
+                <motion.div
                   key={item.name}
-                  href={item.href}
-                  className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium text-sm"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  {item.name}
-                </Link>
+                  <Link
+                    href={item.href}
+                    className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 font-medium text-sm"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
 
             {/* Social Icons */}
             <div className="hidden md:flex items-center space-x-2 bg-white/5 rounded-xl p-1">
-              <a href="https://github.com/tushar-2223" target="_blank" rel="noopener noreferrer">
+              <motion.a 
+                href="https://github.com/tushar-2223" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   variant="ghost"
                   size="icon"
@@ -62,8 +73,14 @@ export const Header = () => {
                 >
                   <Github className="h-4 w-4" />
                 </Button>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              </motion.a>
+              <motion.a 
+                href="#" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   variant="ghost"
                   size="icon"
@@ -71,16 +88,22 @@ export const Header = () => {
                 >
                   <Linkedin className="h-4 w-4" />
                 </Button>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              </motion.a>
+              <motion.a 
+                href="#" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   variant="ghost"
                   size="icon"
                   className="text-white/70 hover:text-white hover:bg-white/10 w-8 h-8"
                 >
-                  <Twitter className="h-4 w-4" />
+                  <TwitterIcon className="h-4 w-4" />
                 </Button>
-              </a>
+              </motion.a>
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -99,14 +122,19 @@ export const Header = () => {
             <div className="md:hidden mt-4 pt-4 border-t border-white/10">
               <div className="flex flex-col space-y-2">
                 {navItems.map((item) => (
-                  <Link
+                  <motion.div
                     key={item.name}
-                    href={item.href}
-                    className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium text-sm"
-                    onClick={() => setIsMenuOpen(false)}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    {item.name}
-                  </Link>
+                    <Link
+                      href={item.href}
+                      className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 font-medium text-sm block"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
               <div className="flex items-center justify-center space-x-2 mt-4 pt-4 border-t border-white/10">

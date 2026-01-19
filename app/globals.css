@@ -74,8 +74,11 @@ html {
 
 /* Custom font variables */
 :root {
-  --font-geist-sans: "Inter", sans-serif;
+  --font-geist-sans: "Inter", "InterVariable", sans-serif;
 }
+
+/* Import Inter font from local files */
+@import url('/fonts/inter.css');
 
 @keyframes dots-move {
   0% {
