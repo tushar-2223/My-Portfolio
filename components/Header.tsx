@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X, Github, Linkedin, Twitter, TwitterIcon } from "lucide-react"
+import { Menu, X, Github, Linkedin, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -10,11 +10,34 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [hoveredPath, setHoveredPath] = useState<string | null>(null)
+  const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+
+      // Track active section based on scroll position
+      const sections = ['about', 'experience', 'projects', 'tech', 'contact']
+      const scrollPosition = window.scrollY + 100 // Offset for better detection
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            return
+          }
+        }
+      }
+
+      // If at top of page, set to home
+      if (window.scrollY < 100) {
+        setActiveSection('')
+      }
     }
+
+    handleScroll() // Call once on mount
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -29,7 +52,7 @@ export const Header = () => {
 
   return (
     <header className={`fixed top-4 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "top-2" : ""}`}>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-6xl">
         <div className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-4 flex items-center justify-between">
 
           <div className="flex items-center justify-between w-full relative">
@@ -47,27 +70,36 @@ export const Header = () => {
             {/* Desktop Navigation - Centered */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:block">
               <nav className="flex items-center space-x-1">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="relative px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors"
-                    onMouseEnter={() => setHoveredPath(item.href)}
-                    onMouseLeave={() => setHoveredPath(null)}
-                  >
-                    {item.name}
-                    {item.href === hoveredPath && (
-                      <motion.div
-                        className="absolute bottom-0 left-0 h-0.5 w-full bg-yellow-500 rounded-full"
-                        layoutId="navbar-underline"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                  </Link>
-                ))}
+                {navItems.map((item) => {
+                  const isActive = activeSection === item.href.replace('/#', '') || (activeSection === '' && item.href === '/');
+
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="relative px-4 py-2 text-sm font-medium transition-colors"
+                      onMouseEnter={() => setHoveredPath(item.href)}
+                      onMouseLeave={() => setHoveredPath(null)}
+                    >
+                      <span className={`relative z-10 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/70 hover:text-white'
+                        }`}>
+                        {item.name}
+                      </span>
+
+                      {/* Simple Bottom Border on Hover */}
+                      {item.href === hoveredPath && (
+                        <motion.div
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400 rounded-full"
+                          layoutId="navbar-underline"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                    </Link>
+                  );
+                })}
               </nav>
             </div>
 
@@ -100,7 +132,7 @@ export const Header = () => {
                 </Button>
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/tushar.p_22/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -109,7 +141,7 @@ export const Header = () => {
                   size="icon"
                   className="text-white/70 hover:text-white hover:bg-white/10"
                 >
-                  <TwitterIcon className="h-5 w-5" />
+                  <Instagram className="h-5 w-5" />
                 </Button>
               </a>
             </div>

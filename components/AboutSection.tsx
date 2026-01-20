@@ -12,11 +12,11 @@ export const AboutSection = () => {
                     <div className="flex flex-col md:flex-row gap-12 items-stretch">
 
                         {/* Left Column - Image */}
-                        <div className="w-full md:w-1/2 flex justify-center h-full">
-                            <div className="relative w-full h-full min-h-[400px] flex items-center justify-center overflow-hidden rounded-xl">
+                        <div className="w-full md:w-1/2 flex justify-center">
+                            <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-xl" style={{ boxShadow: "0 0 40px 10px rgba(0, 0, 0, 0.8)" }}>
                                 <img
-                                    src="https://media.licdn.com/dms/image/v2/D4D03AQHNbqySVqpbEw/profile-displayphoto-scale_400_400/B4DZr0h6jrIMAg-/0/1765039124972?e=1770249600&v=beta&t=qGbom7z04EXb6wuEMDYTvqTPP1RYHu4Xs9eTeIDiLtQ"
-                                    alt="Profile"
+                                    src="/profile.jpg"
+                                    alt="Tushar Pankhaniya"
                                     className="w-full h-full object-cover"
                                 />
                             </div>

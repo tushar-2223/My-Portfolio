@@ -21,25 +21,19 @@ function ProjectCard({ project }: { project: Project }) {
       {/* Main card - on top */}
       <button
         type="button"
-        className="relative flex gap-4 py-6 px-8 rounded-2xl h-32 items-center bg-zinc-900 border border-zinc-700 hover:border-zinc-600 top-0 left-0 group-hover:-top-2 group-hover:-left-2 transition-all ease-in-out w-full shadow-lg hover:shadow-xl"
+        className="relative flex justify-between px-8 rounded-2xl h-32 items-center bg-zinc-900 border border-zinc-700 hover:border-zinc-600 top-0 left-0 group-hover:-top-2 group-hover:-left-2 transition-all ease-in-out w-full shadow-lg hover:shadow-xl"
         onClick={() => window.open(`https://${project.url}`, "_blank")}
       >
-        <img
-          src={project.logoUrl || "/placeholder.svg"}
-          alt={`${project.title} logo`}
-          className="w-16 h-16 rounded-lg object-contain flex-shrink-0 bg-zinc-800 p-2"
-          onError={(e) => {
-            e.currentTarget.src = `/placeholder.svg?height=64&width=64`
-          }}
-        />
-        <div className="flex flex-col gap-1 text-start relative">
-          <p className="text-base font-semibold text-white max-w-[20ch] overflow-hidden leading-tight">
+        <div className="flex flex-col gap-1 text-start relative pr-4">
+          <p className="text-xl font-bold text-white max-w-[20ch] leading-tight group-hover:text-white transition-colors">
             {project.title}
           </p>
-          <p className="text-sm text-zinc-400 hover:text-blue-400 max-w-[20ch] overflow-hidden whitespace-nowrap truncate transition-colors">
+          <p className="text-sm text-zinc-400 group-hover:text-blue-400 max-w-[25ch] overflow-hidden whitespace-nowrap truncate transition-colors">
             {project.url}
           </p>
         </div>
+
+        <ExternalLink className="w-6 h-6 text-zinc-500 group-hover:text-white transition-colors flex-shrink-0" />
       </button>
     </div>
   )

@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { Providers } from "@/components/providers"
 import { Header } from "@/components/Header"
-import { Footer } from "@/components/Footer"
 import { PageTransition } from "@/components/PageTransition"
 import { Toaster } from "@/components/ui/sonner"
 
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tushar Pankhaniya - Mobile Application Developer",
     description: "The portfolio of Tushar Pankhaniya, a Mobile Application Developer specializing in React Native and Flutter, showcasing projects and blog posts.",
-    url: "https://your-domain.com", // Replace with your actual domain
+    url: "https://tusharpankhaniya.vercel.app", // Replace with your actual domain
     siteName: "Tushar Pankhaniya's Portfolio",
     locale: 'en_US',
     type: 'website',
@@ -45,7 +44,6 @@ export default function RootLayout({
           <PageTransition>
             {children}
           </PageTransition>
-          <Footer />
           <Toaster />
         </Providers>
       </body>

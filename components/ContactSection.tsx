@@ -234,6 +234,9 @@ export const ContactSection = () => {
           <p className="text-gray-500">
             &copy; {new Date().getFullYear()} Tushar Pankhaniya. All rights reserved.
           </p>
+          <p className="text-gray-600 mt-2">
+            Made with ❤️ and lots of ☕
+          </p>
         </div>
       </div>
     </section>

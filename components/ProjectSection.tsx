@@ -1,54 +1,80 @@
-import React from 'react'
-import { ProjectCard } from './ProjectCard'
-import { ExternalLink } from 'lucide-react'
-import { AnimatedDotBackground } from './ui/animated-dot-background'
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import { ProjectCard } from './ProjectCard';
+import { ExternalLink, Loader2 } from 'lucide-react';
+import { AnimatedDotBackground } from './ui/animated-dot-background';
+
+interface GitHubRepo {
+  id: number;
+  name: string;
+  full_name: string;
+  html_url: string;
+  description: string | null;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  topics: string[];
+}
+
+interface Project {
+  id: string;
+  title: string;
+  url: string;
+  logoUrl: string;
+  description?: string;
+  language?: string;
+  stars?: number;
+  forks?: number;
+}
 
 const ProjectSection = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const projects = [
-    {
-      id: "1",
-      title: "E-Commerce Mobile App",
-      url: "github.com/tushar/ecommerce-app",
-      logoUrl: "/placeholder.svg",
-    },
-    {
-      id: "2",
-      title: "Task Management Dashboard",
-      url: "github.com/tushar/task-manager",
-      logoUrl: "/placeholder.svg",
-    },
-    {
-      id: "3",
-      title: "Weather App",
-      url: "github.com/tushar/weather-app",
-      logoUrl: "/placeholder.svg",
-    },
-    {
-      id: "4",
-      title: "Social Media Dashboard",
-      url: "github.com/tushar/social-dashboard",
-      logoUrl: "/placeholder.svg",
-    },
-    {
-      id: "5",
-      title: "Portfolio Website",
-      url: "github.com/tushar/portfolio",
-      logoUrl: "/placeholder.svg",
-    },
-    {
-      id: "6",
-      title: "Chat Application",
-      url: "github.com/tushar/chat-app",
-      logoUrl: "/placeholder.svg",
-    },
-  ];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('/api/github');
+        if (!response.ok) {
+          throw new Error('Failed to fetch projects');
+        }
+        const repos: GitHubRepo[] = await response.json();
+
+        const formattedProjects: Project[] = repos.slice(0, 6).map((repo) => ({
+          id: repo.id.toString(),
+          title: repo.name.replace(/-/g, ' ').replace(/_/g, ' '),
+          url: repo.html_url.replace('https://', ''),
+          logoUrl: `/placeholder.png`,
+          description: repo.description || undefined,
+          language: repo.language || undefined,
+          stars: repo.stargazers_count,
+          forks: repo.forks_count,
+        }));
+
+        setProjects(formattedProjects);
+      } catch (err) {
+        console.error('Error fetching GitHub repos:', err);
+        setError('Failed to load projects');
+        // Fallback to static projects
+        setProjects([
+          { id: "1", title: "My Portfolio", url: "github.com/tushar-2223/My-Portfolio", logoUrl: "/placeholder.svg" },
+          { id: "2", title: "React Native App", url: "github.com/tushar-2223", logoUrl: "/placeholder.svg" },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <section id="projects" className="py-20 px-6 relative">
       <AnimatedDotBackground />
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Header section like the uploaded image */}
+        {/* Header section */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
             PROJECTS
@@ -58,15 +84,21 @@ const ProjectSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-16">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[200px]">
+            <Loader2 className="w-8 h-8 text-white animate-spin" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-16">
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        )}
 
         <div className="flex justify-center mt-16">
           <a
-            href="https://github.com"
+            href="https://github.com/tushar-2223"
             target="_blank"
             rel="noopener noreferrer"
             className="flex gap-2 justify-center items-center text-zinc-500 hover:text-white transition-all ease-linear group"
@@ -79,7 +111,7 @@ const ProjectSection = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ProjectSection
+export default ProjectSection;
