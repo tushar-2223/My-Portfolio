@@ -82,7 +82,7 @@ html {
 }
 
 /* Import Inter font from local files */
-@import url('/fonts/inter.css');
+/* @import url('/fonts/inter.css'); - Removed, using next/font/google */
 
 @keyframes dots-move {
   0% {
