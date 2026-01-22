@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { CardWithCorners } from "@/components/ui/card-with-corners"
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Loader2 } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Loader2, Instagram } from "lucide-react"
 import { toast } from "sonner"
 
 export const ContactSection = () => {
@@ -112,14 +112,14 @@ export const ContactSection = () => {
                 <p className="text-white font-medium mb-4">Follow Me</p>
                 <div className="flex space-x-4">
                   {/* TODO: Replace with your actual social media links */}
-                  <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
+                  <a href="https://github.com/tushar-2223" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
                     <Github className="h-5 w-5 text-white" />
                   </a>
-                  <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
+                  <a href="https://www.linkedin.com/in/tushar2223" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
                     <Linkedin className="h-5 w-5 text-white" />
                   </a>
-                  <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
-                    <Twitter className="h-5 w-5 text-white" />
+                  <a href="https://www.instagram.com/tushar.p_22/" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
+                    <Instagram className="h-5 w-5 text-white" />
                   </a>
                 </div>
               </div>

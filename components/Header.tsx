@@ -86,10 +86,10 @@ export const Header = () => {
                         {item.name}
                       </span>
 
-                      {/* Simple Bottom Border on Hover */}
+                      {/* Simple Bottom Border on Hover Only */}
                       {item.href === hoveredPath && (
                         <motion.div
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400 rounded-full"
+                          className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.8),0_0_5px_rgba(59,130,246,0.8)]"
                           layoutId="navbar-underline"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
