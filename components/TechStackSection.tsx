@@ -2,7 +2,7 @@
 
 import {
   SiReact, SiFlutter, SiExpo, SiRedux, SiDart,
-  SiTypescript, SiJavascript, SiNextdotjs, SiNodedotjs, SiExpress, SiMongodb, SiMysql, SiTailwindcss,
+  SiTypescript, SiJavascript, SiNextdotjs, SiNodedotjs, SiExpress, SiMongodb, SiTailwindcss,
   SiFirebase, SiSupabase, SiGit, SiGithub, SiFigma
 } from 'react-icons/si';
 import { FaCode, FaRobot, FaGamepad, FaBrain } from 'react-icons/fa';
@@ -49,7 +49,6 @@ export const TechStackSection = () => {
         { name: "Node.js", icon: SiNodedotjs, url: "https://nodejs.org" },
         { name: "Express.js", icon: SiExpress, url: "https://expressjs.com" },
         { name: "MongoDB", icon: SiMongodb, url: "https://www.mongodb.com" },
-        { name: "SQL", icon: SiMysql, url: "https://www.mysql.com" },
         { name: "Tailwind CSS", icon: SiTailwindcss, url: "https://tailwindcss.com" },
       ],
       hoverClass: "group-hover:border-[#ffd074]",
@@ -65,7 +64,6 @@ export const TechStackSection = () => {
         { name: "Git", icon: SiGit, url: "https://git-scm.com" },
         { name: "GitHub", icon: SiGithub, url: "https://github.com" },
         { name: "Figma", icon: SiFigma, url: "https://figma.com" },
-        { name: "Cursor", icon: FaCode, url: "https://cursor.sh" },
       ],
       hoverClass: "group-hover:border-blue-500",
     }

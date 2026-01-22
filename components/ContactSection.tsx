@@ -73,35 +73,35 @@ export const ContactSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <div className="space-y-8 h-full">
-            <CardWithCorners className="p-6 md:p-8 h-full">
+            <CardWithCorners className="p-4 md:p-8 h-full">
               <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
 
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-blue-600/20 rounded-lg">
+                  <div className="p-3 bg-blue-600/20 rounded-lg flex-shrink-0">
                     <Mail className="h-6 w-6 text-blue-400" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-white font-medium">Email</p>
-                    <p className="text-white/60">pankhaniyatushar9@gmail.com</p>
+                    <p className="text-white/60 break-all">pankhaniyatushar9@gmail.com</p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-green-600/20 rounded-lg">
+                  <div className="p-3 bg-green-600/20 rounded-lg flex-shrink-0">
                     <Phone className="h-6 w-6 text-green-400" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-white font-medium">Phone</p>
                     <p className="text-white/60">+91 9313346569</p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-purple-600/20 rounded-lg">
+                  <div className="p-3 bg-purple-600/20 rounded-lg flex-shrink-0">
                     <MapPin className="h-6 w-6 text-purple-400" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-white font-medium">Location</p>
                     <p className="text-white/60">Anand, Gujarat, India</p>
                   </div>

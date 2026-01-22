@@ -8,8 +8,8 @@ export const AboutSection = () => {
     return (
         <section id="about" className="py-20 px-6 bg-black relative overflow-hidden">
             <div className="container mx-auto max-w-6xl relative z-10">
-                <CardWithCorners className="p-6 md:p-12">
-                    <div className="flex flex-col md:flex-row gap-12 items-stretch">
+                <CardWithCorners className="p-5 md:p-12">
+                    <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-stretch">
 
                         {/* Left Column - Image */}
                         <div className="w-full md:w-1/2 flex justify-center">
