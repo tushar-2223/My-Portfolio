@@ -71,7 +71,7 @@ const ProjectSection = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-20 px-6 relative overflow-hidden">
+    <section id="projects" className="py-20  relative overflow-hidden">
       <AnimatedDotBackground />
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header section */}

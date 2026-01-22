@@ -70,7 +70,7 @@ export const TechStackSection = () => {
   ];
 
   return (
-    <section id="tech" className="py-20 px-6 bg-black">
+    <section id="tech" className="py-20 md:px-6 bg-black">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">

@@ -5,7 +5,7 @@ import { BackgroundLines } from "@/components/ui/background-lines";
 export const HeroSection = () => {
   return (
     <section id="home" className="relative bg-black">
-      <BackgroundLines className="flex items-center justify-center w-full flex-col px-4 pt-24 min-h-screen bg-black">
+      <BackgroundLines className="flex items-center justify-center w-full flex-col pt-24 min-h-screen bg-black">
         <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent leading-tight tracking-tight font-[family-name:var(--font-geist-sans)] px-2">
             Hey, I'm Tushar

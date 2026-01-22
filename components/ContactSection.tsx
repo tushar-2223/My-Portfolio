@@ -59,7 +59,7 @@ export const ContactSection = () => {
   }
 
   return (
-    <section id="contact" className="py-20 px-6 bg-black">
+    <section id="contact" className="py-20  bg-black">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
@@ -128,7 +128,7 @@ export const ContactSection = () => {
 
           {/* Contact Form */}
           <div className="h-full">
-            <CardWithCorners className="p-6 md:p-8 h-full">
+            <CardWithCorners className="p-4 md:p-8 h-full">
               <h3 className="text-2xl font-bold text-white mb-6">Send Message</h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
