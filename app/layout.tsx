@@ -6,6 +6,7 @@ import { Providers } from "@/components/providers"
 import { Header } from "@/components/Header"
 import { PageTransition } from "@/components/PageTransition"
 import { Toaster } from "@/components/ui/sonner"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
 export const metadata: Metadata = {
   title: "Tushar Pankhaniya - Mobile Application Developer",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tushar Pankhaniya - Mobile Application Developer",
     description: "The portfolio of Tushar Pankhaniya, a Mobile Application Developer specializing in React Native and Flutter, showcasing projects and blog posts.",
-    url: "https://tusharpankhaniya.vercel.app", // Replace with your actual domain
+    url: "https://tusharpankhaniya.vercel.app",
     siteName: "Tushar Pankhaniya's Portfolio",
     locale: 'en_US',
     type: 'website',
@@ -49,6 +50,7 @@ export default function RootLayout({
           </PageTransition>
           <Toaster />
         </Providers>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
       </body>
     </html>
   )
