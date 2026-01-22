@@ -11,10 +11,10 @@ const CardWithCorners = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
       {...props}
     >
       {/* Corner Icons */}
-      <CornerIcon className="absolute h-6 w-6 -top-3 -left-3 text-white" />
-      <CornerIcon className="absolute h-6 w-6 -bottom-3 -left-3 text-white" />
-      <CornerIcon className="absolute h-6 w-6 -top-3 -right-3 text-white" />
-      <CornerIcon className="absolute h-6 w-6 -bottom-3 -right-3 text-white" />
+      <CornerIcon className="absolute h-6 w-6 -top-2 -left-2 md:-top-3 md:-left-3 text-white" />
+      <CornerIcon className="absolute h-6 w-6 -bottom-2 -left-2 md:-bottom-3 md:-left-3 text-white" />
+      <CornerIcon className="absolute h-6 w-6 -top-2 -right-2 md:-top-3 md:-right-3 text-white" />
+      <CornerIcon className="absolute h-6 w-6 -bottom-2 -right-2 md:-bottom-3 md:-right-3 text-white" />
 
       {children}
     </div>

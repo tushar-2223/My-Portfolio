@@ -7,19 +7,19 @@ export const HeroSection = () => {
     <section id="home" className="relative bg-black">
       <BackgroundLines className="flex items-center justify-center w-full flex-col px-4 pt-24 min-h-screen bg-black">
         <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent leading-tight tracking-tight font-[family-name:var(--font-geist-sans)]">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent leading-tight tracking-tight font-[family-name:var(--font-geist-sans)] px-2">
             Hey, I'm Tushar
             <br />
             Welcome to my corner of the internet!
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed font-light font-[family-name:var(--font-geist-sans)]">
+          <p className="text-lg md:text-2xl text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed font-light font-[family-name:var(--font-geist-sans)] px-4">
             I am a mobile application developer with 1+ year experience building cool applications with React Native and Flutter.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <a href="https://drive.google.com/file/d/1uYz2Y7rcRB-62QXZgwQw8UbfYG3YWu7j/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-block">
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 font-medium font-[family-name:var(--font-geist-sans)] shadow-lg hover:shadow-xl transition-all duration-300 rounded-full">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 px-4">
+            <a href="https://drive.google.com/file/d/1uYz2Y7rcRB-62QXZgwQw8UbfYG3YWu7j/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-block w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 font-medium font-[family-name:var(--font-geist-sans)] shadow-lg hover:shadow-xl transition-all duration-300 rounded-full">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </Button>
@@ -27,7 +27,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Social Buttons - Mobile Only */}
-          <div className="flex justify-center gap-6 mb-16 md:hidden">
+          <div className="flex justify-center flex-wrap gap-4 mb-16 md:hidden px-4">
             <a href="https://github.com/tushar-2223" target="_blank" rel="noopener noreferrer" className="group p-3 bg-zinc-900 border border-zinc-700 rounded-xl hover:border-purple-500 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-300">
               <Github className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
             </a>

@@ -8,7 +8,7 @@ export const AboutSection = () => {
     return (
         <section id="about" className="py-20 px-6 bg-black relative overflow-hidden">
             <div className="container mx-auto max-w-6xl relative z-10">
-                <CardWithCorners className="p-8 md:p-12">
+                <CardWithCorners className="p-6 md:p-12">
                     <div className="flex flex-col md:flex-row gap-12 items-stretch">
 
                         {/* Left Column - Image */}
@@ -30,7 +30,7 @@ export const AboutSection = () => {
                                 transition={{ duration: 0.5 }}
                                 viewport={{ once: true }}
                             >
-                                <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
+                                <h2 className="text-2xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
                                     About Me
                                 </h2>
 

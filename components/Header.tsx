@@ -151,7 +151,7 @@ export const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-white"
+            className="md:hidden text-white flex-shrink-0 ml-4"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

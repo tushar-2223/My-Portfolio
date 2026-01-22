@@ -90,7 +90,7 @@ export const TechStackSection = () => {
                 {category.title}
               </h3>
 
-              <div className="flex flex-wrap justify-center gap-6">
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6 px-2">
                 {category.technologies.map((tech, index) => {
                   const IconComponent = tech.icon;
                   return (
@@ -101,7 +101,7 @@ export const TechStackSection = () => {
                       rel="noopener noreferrer"
                       className="group inline-block text-center cursor-pointer"
                     >
-                      <div className={`h-24 w-24 rounded-[20px] border border-zinc-800 bg-zinc-900/50 p-2 transition-all duration-500 group-hover:-translate-y-3 ${category.hoverClass}`}>
+                      <div className={`h-20 w-20 md:h-24 md:w-24 rounded-[20px] border border-zinc-800 bg-zinc-900/50 p-2 transition-all duration-500 group-hover:-translate-y-3 ${category.hoverClass}`}>
                         <div className="grid h-full place-items-center rounded-xl border border-white/5 bg-zinc-800/50 shadow-inner">
                           <IconComponent className="w-10 h-10 text-white/70 group-hover:text-white transition-colors duration-300 group-hover:scale-110" />
                         </div>
