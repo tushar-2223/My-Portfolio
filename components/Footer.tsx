@@ -38,7 +38,7 @@ export const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Quick Links</h4>
             <div className="space-y-2">
-              {["About", "Projects", "Blog", "Toolbox", "Contact"].map((link) => (
+              {["About", "Academic Projects", "Blog", "Contact"].map((link) => (
                 <Link
                   key={link}
                   href={`/${link.toLowerCase()}`}
@@ -55,7 +55,7 @@ export const Footer = () => {
 
         <div className="border-t border-white/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <p className="text-white/60 text-sm">© 2024 Tushar Pankhaniya. All rights reserved.</p>
+            <p className="text-white/60 text-sm">© 2026 Tushar Pankhaniya. All rights reserved.</p>
             <div className="flex items-center text-white/60 text-sm mt-4 md:mt-0">
               <span>Made with</span>
               <Heart className="h-4 w-4 text-red-500 mx-2 fill-current" />

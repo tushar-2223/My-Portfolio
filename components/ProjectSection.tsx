@@ -85,7 +85,7 @@ const ProjectSection = () => {
         {/* Header section */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
-            PROJECTS
+            ACADEMIC PROJECTS
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             A collection of tools and applications I've built to solve real-world problems
