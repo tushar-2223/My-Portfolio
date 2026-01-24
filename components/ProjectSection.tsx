@@ -42,7 +42,7 @@ const ProjectSection = () => {
         }
         const repos: GitHubRepo[] = await response.json();
 
-        const formattedProjects: Project[] = repos.slice(0, 6).map((repo) => ({
+        const formattedProjects: Project[] = repos.map((repo: GitHubRepo) => ({
           id: repo.id.toString(),
           title: repo.name.replace(/-/g, ' ').replace(/_/g, ' '),
           url: repo.html_url.replace('https://', ''),
@@ -59,8 +59,9 @@ const ProjectSection = () => {
         setError('Failed to load projects');
         // Fallback to static projects
         setProjects([
-          { id: "1", title: "My Portfolio", url: "github.com/tushar-2223/My-Portfolio", logoUrl: "/placeholder.svg" },
-          { id: "2", title: "React Native App", url: "github.com/tushar-2223", logoUrl: "/placeholder.svg" },
+          { id: "1", title: "BlueBird Movies", url: "github.com/tushar-2223/BlueBird-Movies", logoUrl: "/placeholder.svg", stars: 0, forks: 0 },
+          { id: "2", title: "Hotel Management System", url: "github.com/tushar-2223/Hotel-Management-System", logoUrl: "/placeholder.svg", stars: 0, forks: 0 },
+          { id: "3", title: "AI Pal", url: "github.com/tushar-2223/AI-Pal", logoUrl: "/placeholder.svg", stars: 0, forks: 0 },
         ]);
       } finally {
         setLoading(false);

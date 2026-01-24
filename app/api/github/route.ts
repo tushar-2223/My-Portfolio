@@ -2,30 +2,38 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const token = process.env.GITHUB_TOKEN;
-  const username = process.env.GITHUB_USERNAME || 'tushar-2223';
+  const targetRepoIds = [617347036, 564415983, 848912262, 1141031041,1141031572 ];
 
   try {
-    const response = await fetch(
-      `https://api.github.com/users/${username}/repos?sort=updated&per_page=10`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/vnd.github.v3+json',
-        },
-        next: { revalidate: 3600 }, // Cache for 1 hour
-      }
+    const repos = await Promise.all(
+      targetRepoIds.map(async (repoId) => {
+        const response = await fetch(
+          `https://api.github.com/repositories/${repoId}`,
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : '',
+              Accept: 'application/vnd.github.v3+json',
+            },
+            next: { revalidate: 3600 },
+          } as any
+        );
+
+        if (!response.ok) {
+          console.error(`Failed to fetch repo ID ${repoId}: ${response.status}`);
+          return null;
+        }
+
+        return response.json();
+      })
     );
 
-    if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`);
-    }
-
-    const repos = await response.json();
+    const filteredRepos = repos.filter((repo) => repo !== null);
     
-    // Filter out forked repos and sort by stars
-    const filteredRepos = repos
-      .filter((repo: any) => !repo.fork)
-      .sort((a: any, b: any) => b.stargazers_count - a.stargazers_count);
+    // Log the fetched repositories for verification
+    console.log('Fetched Targeted Repositories:');
+    filteredRepos.forEach((repo: any) => {
+      console.log(`ID: ${repo.id}, Name: ${repo.name}`);
+    });
 
     return NextResponse.json(filteredRepos);
   } catch (error) {

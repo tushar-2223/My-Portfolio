@@ -19,7 +19,7 @@ export const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 px-4">
             <a href="https://drive.google.com/file/d/1uYz2Y7rcRB-62QXZgwQw8UbfYG3YWu7j/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-block w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 font-medium font-[family-name:var(--font-geist-sans)] shadow-lg hover:shadow-xl transition-all duration-300 rounded-full">
+              <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#ffd074] to-[#b087ff] hover:brightness-110 text-black px-8 py-3 font-bold font-[family-name:var(--font-geist-sans)] shadow-lg hover:shadow-[0_0_20px_rgba(255,208,116,0.3)] transition-all duration-300 rounded-full">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </Button>
@@ -28,13 +28,13 @@ export const HeroSection = () => {
 
           {/* Social Buttons - Mobile Only */}
           <div className="flex justify-center flex-wrap gap-4 mb-16 md:hidden px-4">
-            <a href="https://github.com/tushar-2223" target="_blank" rel="noopener noreferrer" className="group p-3 bg-zinc-900 border border-zinc-700 rounded-xl hover:border-purple-500 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-300">
+            <a href="https://github.com/tushar-2223" target="_blank" rel="noopener noreferrer" className="group p-3 bg-zinc-900 border border-zinc-700 rounded-xl hover:border-[#ffd074] hover:shadow-[0_0_20px_rgba(255,208,116,0.3)] transition-all duration-300">
               <Github className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
             </a>
-            <a href="https://www.linkedin.com/in/tushar2223" target="_blank" rel="noopener noreferrer" className="group p-3 bg-zinc-900 border border-zinc-700 rounded-xl hover:border-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300">
+            <a href="https://www.linkedin.com/in/tushar2223" target="_blank" rel="noopener noreferrer" className="group p-3 bg-zinc-900 border border-zinc-700 rounded-xl hover:border-[#b087ff] hover:shadow-[0_0_20px_rgba(176,135,255,0.3)] transition-all duration-300">
               <Linkedin className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
             </a>
-            <a href="https://www.instagram.com/tushar.p_22/" target="_blank" rel="noopener noreferrer" className="group p-3 bg-zinc-900 border border-zinc-700 rounded-xl hover:border-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.5)] transition-all duration-300">
+            <a href="https://www.instagram.com/tushar.p_22/" target="_blank" rel="noopener noreferrer" className="group p-3 bg-zinc-900 border border-zinc-700 rounded-xl hover:border-[#ffd074] hover:shadow-[0_0_20px_rgba(255,208,116,0.3)] transition-all duration-300">
               <Instagram className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
             </a>
           </div>

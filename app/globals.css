@@ -32,7 +32,7 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 240 10% 2%; /* Deep Black */
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -40,22 +40,19 @@
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
     --primary-foreground: 240 5.9% 10%;
-    --secondary: 270 50% 40%;
-    /* Purple */
+    --secondary: 261 100% 76%; /* Purple #b087ff */
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 48 96% 53%;
-    /* Yellow */
+    --accent: 40 100% 73%; /* Yellow #ffd074 */
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 270 50% 40%;
-    /* Purple border */
+    --border: 261 100% 76%; /* Purple #b087ff */
     --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
+    --ring: 261 100% 76%;
+    --chart-1: 261 100% 76%;
+    --chart-2: 40 100% 73%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
@@ -105,7 +102,7 @@ html {
 
 .prose h1 {
   @apply text-4xl md:text-5xl font-bold text-white mb-8 mt-0 leading-tight;
-  background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #ffd074 0%, #b087ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -123,7 +120,7 @@ html {
   bottom: -1px;
   width: 60px;
   height: 3px;
-  background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #ffd074 0%, #b087ff 100%);
   border-radius: 2px;
 }
 
