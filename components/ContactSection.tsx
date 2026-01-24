@@ -78,8 +78,8 @@ export const ContactSection = () => {
 
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-blue-600/20 rounded-lg flex-shrink-0">
-                    <Mail className="h-6 w-6 text-blue-400" />
+                  <div className="p-3 bg-[#ffd074]/20 rounded-lg flex-shrink-0">
+                    <Mail className="h-6 w-6 text-[#ffd074]" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-white font-medium">Email</p>
@@ -88,8 +88,8 @@ export const ContactSection = () => {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-green-600/20 rounded-lg flex-shrink-0">
-                    <Phone className="h-6 w-6 text-green-400" />
+                  <div className="p-3 bg-[#b087ff]/20 rounded-lg flex-shrink-0">
+                    <Phone className="h-6 w-6 text-[#b087ff]" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-white font-medium">Phone</p>
@@ -98,8 +98,8 @@ export const ContactSection = () => {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-purple-600/20 rounded-lg flex-shrink-0">
-                    <MapPin className="h-6 w-6 text-purple-400" />
+                  <div className="p-3 bg-[#ffd074]/20 rounded-lg flex-shrink-0">
+                    <MapPin className="h-6 w-6 text-[#ffd074]" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-white font-medium">Location</p>
@@ -144,7 +144,7 @@ export const ContactSection = () => {
                       value={formData.firstName}
                       onChange={handleChange}
                       placeholder="John"
-                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-[#ffd074] focus:ring-[#ffd074]/20"
                       required
                       disabled={isSubmitting}
                     />
@@ -160,7 +160,7 @@ export const ContactSection = () => {
                       value={formData.lastName}
                       onChange={handleChange}
                       placeholder="Doe"
-                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-[#ffd074] focus:ring-[#ffd074]/20"
                       required
                       disabled={isSubmitting}
                     />
@@ -178,7 +178,7 @@ export const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="john@example.com"
-                    className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
+                    className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-[#b087ff] focus:ring-[#b087ff]/20"
                     required
                     disabled={isSubmitting}
                   />
@@ -195,7 +195,7 @@ export const ContactSection = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Project Inquiry"
-                    className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20"
+                    className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-[#ffd074] focus:ring-[#ffd074]/20"
                     required
                     disabled={isSubmitting}
                   />
@@ -212,13 +212,13 @@ export const ContactSection = () => {
                     onChange={handleChange}
                     placeholder="Tell me about your project..."
                     rows={5}
-                    className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20 resize-none"
+                    className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-[#b087ff] focus:ring-[#b087ff]/20 resize-none"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3" disabled={isSubmitting}>
+                <Button type="submit" className="w-full bg-gradient-to-r from-[#ffd074] to-[#b087ff] hover:brightness-110 text-black font-bold py-3" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   ) : (

@@ -10,7 +10,7 @@ export const ExperienceSection = () => {
                 <div>
                     <h3 className="text-2xl font-bold text-white mb-2">Mobile App Developer</h3>
                     <a href="https://webmobtech.com/" target="_blank" rel="noopener noreferrer">
-                        <h4 className="text-xl font-semibold text-purple-400 mb-2 hover:underline cursor-pointer inline-block">WebMobTech Solutions Pvt. Ltd.</h4>
+                        <h4 className="text-xl font-semibold text-[#b087ff] mb-2 hover:underline cursor-pointer inline-block">WebMobTech Solutions Pvt. Ltd.</h4>
                     </a>
                     <p className="text-sm text-gray-500 mb-4">📍 Ahmedabad</p>
                     <p className="text-gray-300 text-base leading-relaxed mb-6">
@@ -32,7 +32,7 @@ export const ExperienceSection = () => {
                 <div>
                     <h3 className="text-2xl font-bold text-white mb-2">Mobile App Development Intern</h3>
                     <a href="https://webmobtech.com/" target="_blank" rel="noopener noreferrer">
-                        <h4 className="text-xl font-semibold text-purple-400 mb-2 hover:underline cursor-pointer inline-block">WebMobTech Solutions Pvt. Ltd.</h4>
+                        <h4 className="text-xl font-semibold text-[#b087ff] mb-2 hover:underline cursor-pointer inline-block">WebMobTech Solutions Pvt. Ltd.</h4>
                     </a>
                     <p className="text-sm text-gray-500 mb-4">📍 Ahmedabad</p>
                     <p className="text-gray-300 text-base leading-relaxed mb-6">
@@ -53,8 +53,8 @@ export const ExperienceSection = () => {
             content: (
                 <div>
                     <h3 className="text-2xl font-bold text-white mb-2">Front End Developer Intern</h3>
-                    <a href="https://www.tatvasoft.com/" target="_blank" rel="noopener noreferrer">
-                        <h4 className="text-xl font-semibold text-purple-400 mb-2 hover:underline cursor-pointer inline-block">Tatvasoft</h4>
+                    <a href="https://tatvasoft.com/" target="_blank" rel="noopener noreferrer">
+                        <h4 className="text-xl font-semibold text-[#b087ff] mb-2 hover:underline cursor-pointer inline-block">Tatvasoft</h4>
                     </a>
                     <p className="text-sm text-gray-500 mb-4">📍 Ahmedabad</p>
                     <p className="text-gray-300 text-base leading-relaxed mb-6">

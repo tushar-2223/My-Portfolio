@@ -65,7 +65,7 @@ export const TechStackSection = () => {
         { name: "GitHub", icon: SiGithub, url: "https://github.com" },
         { name: "Figma", icon: SiFigma, url: "https://figma.com" },
       ],
-      hoverClass: "group-hover:border-blue-500",
+      hoverClass: "group-hover:border-[#b087ff]",
     }
   ];
 

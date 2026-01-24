@@ -44,7 +44,12 @@ const ProjectSection = () => {
 
         const formattedProjects: Project[] = repos.map((repo: GitHubRepo) => ({
           id: repo.id.toString(),
-          title: repo.name.replace(/-/g, ' ').replace(/_/g, ' '),
+          title: repo.name
+            .replace(/-/g, ' ')
+            .replace(/_/g, ' ')
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' '),
           url: repo.html_url.replace('https://', ''),
           logoUrl: `/placeholder.png`,
           description: repo.description || undefined,
@@ -62,6 +67,8 @@ const ProjectSection = () => {
           { id: "1", title: "BlueBird Movies", url: "github.com/tushar-2223/BlueBird-Movies", logoUrl: "/placeholder.svg", stars: 0, forks: 0 },
           { id: "2", title: "Hotel Management System", url: "github.com/tushar-2223/Hotel-Management-System", logoUrl: "/placeholder.svg", stars: 0, forks: 0 },
           { id: "3", title: "AI Pal", url: "github.com/tushar-2223/AI-Pal", logoUrl: "/placeholder.svg", stars: 0, forks: 0 },
+          { id: "4", title: "Offline Translator", url: "github.com/tushar-2223/offline_translator", logoUrl: "/placeholder.svg", stars: 0, forks: 0 },
+          { id: "5", title: "Flash Note", url: "github.com/tushar-2223/Flash-Note", logoUrl: "/placeholder.svg", stars: 0, forks: 0 },
         ]);
       } finally {
         setLoading(false);
@@ -90,7 +97,7 @@ const ProjectSection = () => {
             <Loader2 className="w-8 h-8 text-white animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 xl:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 xl:gap-16 w-full justify-items-start">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
