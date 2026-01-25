@@ -1,44 +1,45 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from 'react';
-import { BlogPost } from '@/types/blog';
-import { BlogCard } from '@/components/BlogCard';
-import { Loader2, Search, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react"
+import { BlogPost } from "@/types/blog"
+import { BlogCard } from "@/components/BlogCard"
+import { Loader2, Search, ArrowLeft } from "lucide-react"
+import Link from "next/link"
+import { motion } from "framer-motion"
 
 export default function BlogListPage() {
-    const [posts, setPosts] = useState<BlogPost[]>([]);
-    const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [posts, setPosts] = useState<BlogPost[]>([])
+    const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([])
+    const [loading, setLoading] = useState(true)
+    const [searchQuery, setSearchQuery] = useState("")
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch('/api/blog');
-                if (!response.ok) throw new Error('Failed to fetch');
-                const blogPosts = await response.json();
-                setPosts(blogPosts);
-                setFilteredPosts(blogPosts);
+                const response = await fetch("/api/blog")
+                if (!response.ok) throw new Error("Failed to fetch")
+                const blogPosts = await response.json()
+                setPosts(blogPosts)
+                setFilteredPosts(blogPosts)
             } catch (error) {
-                console.error('Error fetching blog posts:', error);
+                console.error("Error fetching blog posts:", error)
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
-        };
+        }
 
-        fetchPosts();
-    }, []);
+        fetchPosts()
+    }, [])
 
     useEffect(() => {
-        const filtered = posts.filter(post =>
-            post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-        );
-        setFilteredPosts(filtered);
-    }, [searchQuery, posts]);
+        const filtered = posts.filter(
+            (post) =>
+                post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                post.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                post.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+        )
+        setFilteredPosts(filtered)
+    }, [searchQuery, posts])
 
     return (
         <div className="min-h-screen bg-black text-white pt-32 pb-20">
@@ -101,5 +102,5 @@ export default function BlogListPage() {
             <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-purple-600/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 -z-10" />
             <div className="fixed bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2 -z-10" />
         </div>
-    );
+    )
 }

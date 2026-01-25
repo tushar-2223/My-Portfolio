@@ -33,16 +33,14 @@ export async function GET() {
     const posts = response.results.map((page: any) => {
       const props = page.properties;
 
-      // 1. Extract Cover Image (Handles both External and Uploaded files)
-      let coverImage = "/fallback-blog-image.jpg"; // Add a default image in your public folder
+     
+      let coverImage = "/placeholder.jpg";
       if (page.cover) {
         coverImage = page.cover.type === "external" 
           ? page.cover.external.url 
           : page.cover.file.url;
       }
 
-      // 2. Extract Author (Assumes you have a 'Created By' or 'Person' property)
-      // If you don't have this, it will safely fall back to null
       const authorData = props.Author?.people?.[0] || page.created_by;
       
       return {
@@ -54,7 +52,7 @@ export async function GET() {
         date: page.created_time,
         coverImage: coverImage,
         author: {
-          name: authorData?.name ?? "Admin",
+          name: authorData?.name ?? "Tushar Pankhaniya",
           avatar: authorData?.avatar_url ?? null,
         }
       };
