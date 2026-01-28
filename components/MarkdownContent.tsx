@@ -113,7 +113,7 @@ function CodeBlock({
     if (!isMultiLine) {
         return (
             <code
-                className="bg-white/10 text-pink-400 px-1.5 py-0.5 rounded text-sm font-mono"
+               className="bg-white/10 text-pink-400 px-1.5 py-0.5 rounded text-[15px] font-mono"
                 suppressHydrationWarning
                 dangerouslySetInnerHTML={{ __html: codeHTML }}
                 {...props}
@@ -256,18 +256,18 @@ function UnorderedList({ children }: { children?: React.ReactNode }) {
 }
 
 function ListItem({ children }: { children?: React.ReactNode }) {
-    return <li className="leading-7">{children}</li>;
+    return <li className="leading-7 text-[17px] md:text-lg">{children}</li>;
 }
 
 // Paragraph component
 function Paragraph({ children }: { children?: React.ReactNode }) {
-    return <p className="mb-6 text-base leading-7 text-white/80">{children}</p>;
+    return <p className="mb-6 text-[17px] md:text-lg leading-7 text-white/80">{children}</p>;
 }
 
 // Blockquote component
 function Blockquote({ children }: { children?: React.ReactNode }) {
     return (
-        <blockquote className="border-l-4 border-purple-500 pl-4 my-6 italic text-white/70 bg-white/5 py-4 pr-4 rounded-r-lg">
+        <blockquote className="border-l-4 border-purple-500 pl-4 my-6 italic text-[17px] md:text-lg text-white/70 bg-white/5 py-4 pr-4 rounded-r-lg">
             {children}
         </blockquote>
     );
@@ -297,12 +297,12 @@ function TableRow({ children }: { children?: React.ReactNode }) {
 }
 
 function TableCell({ children }: { children?: React.ReactNode }) {
-    return <td className="px-4 py-3 text-white/80">{children}</td>;
+    return <td className="px-4 py-3 text-[15px] md:text-base text-white/80" >{children}</td>;
 }
 
 function TableHeader({ children }: { children?: React.ReactNode }) {
     return (
-        <th className="px-4 py-3 text-left font-semibold text-white">{children}</th>
+        <th className="px-4 py-3 text-left text-[15px] md:text-base font-semibold text-white">{children}</th>
     );
 }
 
