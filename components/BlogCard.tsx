@@ -11,16 +11,8 @@ type Props = {
 }
 
 export function BlogCard({ post }: Props) {
-
-  const encodedPost = encodeURIComponent(JSON.stringify(post))
-
   return (
-    <Link
-     href={{
-        pathname: `/blog/${post.slug}`,
-        query: { post: encodedPost },
-      }}
-    >
+    <Link href={`/blog/${post.slug}`}>
       <CardWithCorners className="group hover:scale-105 transition-all cursor-pointer">
 
         <div className="aspect-video overflow-hidden mb-4 -mx-6 -mt-6">
@@ -33,7 +25,7 @@ export function BlogCard({ post }: Props) {
 
         <div className="space-y-4">
 
-          {/* Date + Author inline */}
+          {/* Date + Author */}
           <div className="flex items-center justify-between text-sm text-white/50">
 
             <span className="flex gap-1 items-center">
@@ -49,12 +41,12 @@ export function BlogCard({ post }: Props) {
           </div>
 
           {/* Title – 2 lines */}
-          <h3 className="text-xl font-bold group-hover:text-blue-400 transition line-clamp-">
+          <h3 className="text-xl font-bold group-hover:text-blue-400 transition line-clamp-2">
             {post.title}
           </h3>
 
           {/* Summary – 1 line */}
-          <p className="text-white/70 text-sm line-clamp-2">
+          <p className="text-white/70 text-sm line-clamp-1">
             {post.summary}
           </p>
 
