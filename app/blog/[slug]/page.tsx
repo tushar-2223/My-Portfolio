@@ -84,7 +84,7 @@ export async function generateMetadata({
 
   const { post } = data
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!
+  const siteUrl = process.env.PUBLIC_SITE_URL
   const blogUrl = `${siteUrl}/blog/${post.slug}`
 
   return {

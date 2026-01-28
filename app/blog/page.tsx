@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import BlogSearch from "./search"
 
 const BASE_URL =
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+    process.env.PUBLIC_SITE_URL!
 
 async function getPosts() {
     const res = await fetch(`${BASE_URL}/api/blog`)
