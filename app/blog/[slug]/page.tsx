@@ -10,6 +10,7 @@ import { BgGradient } from "@/components/ui/bg-gradient"
 import { ArrowLeft, Clock, Eye } from "lucide-react"
 import readingDuration from "reading-duration"
 import { MarkdownContent } from "@/components/MarkdownContent"
+import { SITE_URL } from "@/lib/utils"
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -84,8 +85,7 @@ export async function generateMetadata({
 
   const { post } = data
 
-  const siteUrl = process.env.PUBLIC_SITE_URL
-  const blogUrl = `${siteUrl}/blog/${post.slug}`
+  const blogUrl = `${SITE_URL}/blog/${post.slug}`
 
   return {
     title: post.title,

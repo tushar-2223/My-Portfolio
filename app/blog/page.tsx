@@ -4,12 +4,10 @@ import { BlogPost } from "@/types/blog"
 import { CardWithCorners } from "@/components/ui/card-with-corners"
 import { Badge } from "@/components/ui/badge"
 import BlogSearch from "./search"
-
-const BASE_URL =
-    process.env.PUBLIC_SITE_URL!
+import { SITE_URL } from "@/lib/utils"
 
 async function getPosts() {
-    const res = await fetch(`${BASE_URL}/api/blog`)
+    const res = await fetch(`${SITE_URL}/api/blog`)
 
     if (!res.ok) return []
 
