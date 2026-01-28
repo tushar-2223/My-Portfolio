@@ -5,7 +5,7 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-const DATABASE_ID = process.env.NOTION_DATABASE_ID!;
+const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 export async function GET() {
   if (!process.env.NOTION_TOKEN || !DATABASE_ID) {
