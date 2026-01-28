@@ -1,0 +1,100 @@
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
+import { Search, Calendar, Clock, User, ArrowRight } from "lucide-react"
+import { BlogPost } from "@/types/blog"
+import { CardWithCorners } from "@/components/ui/card-with-corners"
+import { Badge } from "@/components/ui/badge"
+
+export default function BlogSearch({ posts }: { posts: BlogPost[] }) {
+    const [query, setQuery] = useState("")
+
+    const filtered = posts.filter(post =>
+        post.title.toLowerCase().includes(query.toLowerCase()) ||
+        post.summary.toLowerCase().includes(query.toLowerCase()) ||
+        post.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+    )
+
+    return (
+        <>
+            {/* Search box */}
+            <div className="relative mb-12">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
+                <input
+                    placeholder="Search blogs by title, summary, or tags..."
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:border-purple-500/50"
+                />
+            </div>
+
+            {/* Blog grid */}
+            {filtered.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {filtered.map(post => (
+                        <Link key={post.id} href={`/blog/${post.slug}`}>
+                            <CardWithCorners className="group hover:scale-105 transition-all cursor-pointer">
+
+                                <div className="aspect-video overflow-hidden mb-4 -mx-6 -mt-6">
+                                    <img
+                                        src={post.coverImage || "/placeholder.jpg"}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition"
+                                    />
+                                </div>
+
+                                <div className="space-y-4">
+
+                                    <div className="flex justify-between text-sm text-white/50">
+                                        <span className="flex gap-1 items-center">
+                                            <Calendar className="h-4 w-4" />
+                                            {new Date(post.date).toLocaleDateString()}
+                                        </span>
+                                        <span className="flex gap-1 items-center">
+                                            <Clock className="h-4 w-4" /> 3 min
+                                        </span>
+                                    </div>
+
+                                    <h3 className="text-xl font-bold group-hover:text-blue-400 transition">
+                                        {post.title}
+                                    </h3>
+
+                                    <p className="text-white/70 text-sm line-clamp-3">
+                                        {post.summary}
+                                    </p>
+
+                                    <div className="flex flex-wrap gap-2">
+                                        {post.tags.slice(0, 3).map(tag => (
+                                            <Badge
+                                                key={tag}
+                                                className="bg-white/10 border border-white/20 text-xs text-white/80"
+                                            >
+                                                {tag}
+                                            </Badge>
+                                        ))}
+                                    </div>
+
+                                    <div className="flex justify-between pt-2 text-sm">
+                                        <span className="flex gap-1 items-center text-white/50">
+                                            <User className="h-3 w-3" />
+                                            {post.author?.name ?? "Tushar Pankhaniya"}
+                                        </span>
+                                        <span className="flex items-center text-blue-400">
+                                            Read More
+                                            <ArrowRight className="ml-1 h-3 w-3" />
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </CardWithCorners>
+                        </Link>
+                    ))}
+                </div>
+            ) : (
+                <div className="text-center py-20 text-gray-500">
+                    No blogs found matching your search.
+                </div>
+            )}
+        </>
+    )
+}

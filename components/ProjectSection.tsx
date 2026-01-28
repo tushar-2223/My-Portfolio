@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { ProjectCard } from './ProjectCard';
+import { ProjectCardSkeleton } from './ProjectCardSkeleton';
 import { ExternalLink, Loader2 } from 'lucide-react';
 import { AnimatedDotBackground } from './ui/animated-dot-background';
 

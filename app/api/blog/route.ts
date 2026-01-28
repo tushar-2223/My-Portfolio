@@ -34,7 +34,7 @@ export async function GET() {
       const props = page.properties;
 
      
-      let coverImage = "/placeholder.jpg";
+      let coverImage = "/placeholder.svg";
       if (page.cover) {
         coverImage = page.cover.type === "external" 
           ? page.cover.external.url 

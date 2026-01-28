@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sugar-high syntax highlighting colors for dark theme */
+:root {
+  --sh-class: #4ec9b0;
+  --sh-identifier: #9cdcfe;
+  --sh-sign: #d4d4d4;
+  --sh-property: #9cdcfe;
+  --sh-entity: #4fc1ff;
+  --sh-jsxliterals: #ce9178;
+  --sh-string: #ce9178;
+  --sh-keyword: #c586c0;
+  --sh-comment: #6a9955;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -75,7 +88,7 @@ html {
 
 /* Custom font variables */
 :root {
-  --font-geist-sans: "Inter", "InterVariable", sans-serif;
+  --font-geist-sans: "Geist", "GeistVariable", sans-serif;
 }
 
 /* Import Inter font from local files */

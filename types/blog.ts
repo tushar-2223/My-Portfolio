@@ -8,6 +8,6 @@ export interface BlogPost {
   tags: string[]
   author?: {
     name: string
-    image?: string
+    avatar?: string | null
   }
 }

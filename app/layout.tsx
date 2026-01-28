@@ -1,12 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Geist } from "next/font/google"
 import "./globals.css"
 import { Providers } from "@/components/providers"
 import { Header } from "@/components/Header"
 import { PageTransition } from "@/components/PageTransition"
 import { Toaster } from "@/components/ui/sonner"
 import { GoogleAnalytics } from "@next/third-parties/google"
+import { ContactSection } from "@/components/ContactSection"
 
 export const metadata: Metadata = {
   title: "Tushar Pankhaniya - Mobile Application Developer",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   },
 };
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
 
 export default function RootLayout({
   children,
@@ -42,12 +43,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-inter`}>
+      <body className={`${geist.variable} font-geist-sans`}>
         <Providers>
           <Header />
           <PageTransition>
             {children}
           </PageTransition>
+          <ContactSection />
           <Toaster />
         </Providers>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />

@@ -59,8 +59,22 @@ export const ContactSection = () => {
   }
 
   return (
-    <section id="contact" className="py-20  bg-black">
-      <div className="container mx-auto max-w-6xl">
+    <section id="contact" className="py-20 bg-black relative flex items-center justify-center w-full overflow-hidden">
+      {/* Grid Background */}
+      <div
+        className="absolute inset-0 h-full w-full pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(to right, #262626 1px, transparent 1px), linear-gradient(to bottom, #262626 1px, transparent 1px)`,
+          backgroundSize: "40px 40px",
+        }}
+      />
+      {/* Radial gradient mask */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+
+      {/* Bottom Fade Gradient (white color slightly low as requested) - Adjusted to be subtle and bottom-to-top */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white/5 to-transparent z-0"></div>
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
             Get In Touch

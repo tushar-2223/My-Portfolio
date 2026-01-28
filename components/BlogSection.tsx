@@ -2,148 +2,138 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowRight, Calendar, Clock, User, Loader2 } from "lucide-react"
+import { Calendar, Clock, User, ArrowRight } from "lucide-react"
+import { BlogPost } from "@/types/blog"
 import { CardWithCorners } from "@/components/ui/card-with-corners"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { BlogPost } from "@/types/blog"
-import { formatDistanceToNow } from "date-fns"
+import { BlogCardSkeleton } from "@/components/BlogCardSkeleton"
 
 export function BlogSection() {
-    const [posts, setPosts] = useState<BlogPost[]>([])
-    const [loading, setLoading] = useState(true)
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await fetch("/api/blog")
-                if (!response.ok) throw new Error("Failed to fetch")
-                const blogPosts = await response.json()
-                setPosts(blogPosts.slice(0, 3))
-            } catch (error) {
-                console.error("Error fetching blog posts:", error)
-            } finally {
-                setLoading(false)
-            }
-        }
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch("/api/blog")
+        if (!res.ok) throw new Error("Failed to fetch blogs")
+        const data = await res.json()
+        setPosts(data.slice(0, 3))
+      } catch (e) {
+        console.error(e)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-        fetchPosts()
-    }, [])
+    load()
+  }, [])
 
-    return (
-        <section id="blog" className="py-20 px-6 bg-black">
-            <div className="container mx-auto max-w-6xl">
-                {/* Heading */}
-                <div className="flex items-center justify-between mb-16">
-                    <div>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                            Latest Blog Posts
-                        </h2>
-                        <p className="text-white/60 text-lg">Thoughts, tutorials, and insights about web development</p>
+  return (
+    <section id="blog" className="py-20 px-6 bg-black">
+      <div className="container mx-auto max-w-6xl">
+
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 uppercase tracking-tight">
+            Latest Blogs
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Thoughts, tutorials, and insights about web & mobile development
+          </p>
+        </div>
+
+        {/* Loader */}
+        {loading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="hidden lg:block"><BlogCardSkeleton /></div>
+            <div className="hidden md:block"><BlogCardSkeleton /></div>
+            <div className="block"><BlogCardSkeleton /></div>
+          </div>
+        )}
+
+        {/* Blog preview */}
+        {!loading && posts.length > 0 && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {posts.map(post => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  <CardWithCorners className="group hover:scale-105 transition-all cursor-pointer">
+
+                    <div className="aspect-video overflow-hidden mb-4 -mx-6 -mt-6">
+                      <img
+                        src={post.coverImage || "/placeholder.svg"}
+                        className="w-full h-full object-cover group-hover:scale-110 transition"
+                      />
                     </div>
 
-                    <Link href="/blog">
-                        <Button
-                            variant="outline"
-                            className="border-white/20 text-white hover:bg-white/10 bg-transparent backdrop-blur-sm"
-                        >
-                            View All Posts
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                    </Link>
-                </div>
+                    <div className="space-y-4">
 
-                {/* Loading state */}
-                {loading && (
-                    <div className="flex justify-center items-center py-20">
-                        <Loader2 className="w-8 h-8 text-purple-500 animate-spin" />
-                    </div>
-                )}
+                      <div className="flex justify-between text-sm text-white/50">
+                        <span className="flex gap-1 items-center">
+                          <Calendar className="h-4 w-4" />
+                          {new Date(post.date).toLocaleDateString()}
+                        </span>
+                        <span className="flex gap-1 items-center">
+                          <Clock className="h-4 w-4" /> 3 min
+                        </span>
+                      </div>
 
-                {/* Empty-state */}
-                {!loading && posts.length === 0 && (
-                    <div className="text-center py-20">
-                        <p className="text-white/60 text-lg">
-                            No blog posts found.
-                        </p>
-                    </div>
-                )}
+                      <h3 className="text-xl font-bold group-hover:text-blue-400 transition">
+                        {post.title}
+                      </h3>
 
-                {/* Posts grid */}
-                {!loading && posts.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {posts.map((post) => (
-                            <Link key={post.id} href={`/blog/${post.slug}`}>
-                                <CardWithCorners className="group cursor-pointer h-full hover:scale-105 transition-all duration-300 hover:border-white/40">
-                                    {/* Cover image */}
-                                    <div className="aspect-video overflow-hidden rounded-lg mb-4 -mx-6 -mt-6">
-                                        <img
-                                            src={post.coverImage || "/placeholder.jpg"}
-                                            alt={post.title}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                    </div>
+                      <p className="text-white/70 text-sm line-clamp-3">
+                        {post.summary}
+                      </p>
 
-                                    <div className="space-y-4">
-                                        {/* Meta */}
-                                        <div className="flex items-center justify-between text-sm text-white/50">
-                                            <span className="flex items-center">
-                                                <Calendar className="h-4 w-4 mr-1" />
-                                                {new Date(post.date).toLocaleDateString("en-US", {
-                                                    month: "short",
-                                                    day: "numeric",
-                                                    year: "numeric",
-                                                })}
-                                            </span>
-                                            <span className="flex items-center">
-                                                <Clock className="h-4 w-4 mr-1" />3 min
-                                            </span>
-                                        </div>
-
-                                        {/* Title */}
-                                        <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 line-clamp-2">
-                                            {post.title}
-                                        </h3>
-
-                                        {/* Summary */}
-                                        <p className="text-white/70 text-sm leading-relaxed line-clamp-3">
-                                            {post.summary}
-                                        </p>
-
-                                        {/* Tags */}
-                                        <div className="flex flex-wrap gap-2">
-                                            {post.tags.slice(0, 3).map((tag) => (
-                                                <Badge
-                                                    key={tag}
-                                                    variant="secondary"
-                                                    className="bg-white/10 text-white/80 hover:bg-white/20 border border-white/20 text-xs"
-                                                >
-                                                    {tag}
-                                                </Badge>
-                                            ))}
-                                        </div>
-
-                                        {/* Author & CTA */}
-                                        <div className="flex items-center justify-between pt-2">
-                                            <span className="flex items-center text-white/50 text-sm">
-                                                <User className="h-3 w-3 mr-1" />
-                                                {post.author?.name ?? "Tushar Pankhaniya"}
-                                            </span>
-
-                                            <span className="flex items-center text-blue-400 text-sm font-medium group-hover:text-blue-300 transition-colors duration-300">
-                                                Read More
-                                                <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform duration-300" />
-                                            </span>
-                                        </div>
-                                    </div>
-                                </CardWithCorners>
-                            </Link>
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags.slice(0, 3).map(tag => (
+                          <Badge
+                            key={tag}
+                            className="bg-white/10 border border-white/20 text-xs text-white/80"
+                          >
+                            {tag}
+                          </Badge>
                         ))}
+                      </div>
+
+                      <div className="flex justify-between pt-2 text-sm">
+                        <span className="flex gap-1 items-center text-white/50">
+                          <User className="h-3 w-3" />
+                          {post.author?.name ?? "Tushar Pankhaniya"}
+                        </span>
+                        <span className="flex items-center text-blue-400">
+                          Read More
+                          <ArrowRight className="ml-1 h-3 w-3" />
+                        </span>
+                      </div>
+
                     </div>
-                )}
+                  </CardWithCorners>
+                </Link>
+              ))}
             </div>
-        </section>
-    )
+
+            {/* CTA */}
+            <div className="flex justify-center mt-16">
+              <Link
+                href="/blog"
+                className="flex gap-2 items-center text-zinc-500 hover:text-white group"
+              >
+                <span className="text-lg font-medium">View more blogs</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </>
+        )}
+
+        {!loading && posts.length === 0 && (
+          <p className="text-center text-gray-500">No blogs found.</p>
+        )}
+      </div>
+    </section>
+  )
 }
 
 export default BlogSection

@@ -47,7 +47,7 @@ export const Header = () => {
     { name: "Experience", href: "/#experience" },
     { name: "Tech Stack", href: "/#tech" },
     { name: "Academic Projects", href: "/#projects" },
-    { name: "Blog", href: "/#blog" },
+    { name: "Blogs", href: "/blog" },
   ]
 
   return (
@@ -77,7 +77,7 @@ export const Header = () => {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="relative px-4 py-2 text-sm font-medium transition-colors"
+                      className="relative px-4 py-2 text-sm font-semibold transition-colors"
                       onMouseEnter={() => setHoveredPath(item.href)}
                       onMouseLeave={() => setHoveredPath(null)}
                     >
