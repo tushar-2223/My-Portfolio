@@ -3,8 +3,6 @@ import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 
 import { BlogPost } from "@/types/blog"
-import { Client } from "@notionhq/client"
-import { NotionToMarkdown } from "notion-to-md"
 import { formatDate } from "@/lib/formatDate"
 import { BgGradient } from "@/components/ui/bg-gradient"
 import { ArrowLeft, Clock, Eye } from "lucide-react"
@@ -12,63 +10,17 @@ import readingDuration from "reading-duration"
 import { MarkdownContent } from "@/components/MarkdownContent"
 import { SITE_URL } from "@/lib/utils"
 
-const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
-})
-
-const n2m = new NotionToMarkdown({ notionClient: notion })
-
 async function getBlogData(slug: string) {
-  const databaseId = process.env.NOTION_DATABASE_ID!
-
-  const response = await notion.databases.query({
-    database_id: databaseId,
-    filter: {
-      property: "Status",
-      status: { equals: "Done" },
-    },
+  const res = await fetch(`${SITE_URL}/api/blog/${slug}`, {
+    cache: "force-cache",
   })
 
-  if (!response.results.length) return null
+  if (!res.ok) return null
 
-  const page = response.results.find((page: any) => {
-    const pageSlug =
-      page.properties.Slug?.rich_text?.[0]?.plain_text ?? page.id
-    return pageSlug === slug
-  }) as any
-
-  if (!page) return null
-
-  const props = page.properties
-
-  let coverImage = "/placeholder.svg"
-  if (page.cover) {
-    coverImage =
-      page.cover.type === "external"
-        ? page.cover.external.url
-        : page.cover.file.url
-  }
-
-  const authorData = props.Author?.people?.[0] || page.created_by
-
-  const post: BlogPost = {
-    id: page.id,
-    title: props.Name?.title?.[0]?.plain_text ?? "Untitled",
-    slug: props.Slug?.rich_text?.[0]?.plain_text ?? page.id,
-    summary: props.Summary?.rich_text?.[0]?.plain_text ?? "",
-    tags: props.Tags?.multi_select?.map((t: any) => t.name) ?? [],
-    date: page.created_time,
-    coverImage,
-    author: {
-      name: authorData?.name ?? "Tushar Pankhaniya",
-      avatar: authorData?.avatar_url ?? null,
-    },
-  }
-
-  const mdblocks = await n2m.pageToMarkdown(page.id)
-  const mdString = n2m.toMarkdownString(mdblocks)
-
-  return { post, mdString: mdString.parent }
+  return res.json() as Promise<{
+    post: BlogPost
+    content: string
+  }>
 }
 
 export async function generateMetadata({
@@ -79,21 +31,16 @@ export async function generateMetadata({
   const { slug } = await params
   const data = await getBlogData(slug)
 
-  if (!data) {
-    return { title: "Blog Not Found" }
-  }
+  if (!data) return { title: "Blog Not Found" }
 
   const { post } = data
-
   const blogUrl = `${SITE_URL}/blog/${post.slug}`
 
   return {
     title: post.title,
     description: post.summary,
 
-    alternates: {
-      canonical: blogUrl,
-    },
+    alternates: { canonical: blogUrl },
 
     openGraph: {
       title: post.title,
@@ -102,7 +49,7 @@ export async function generateMetadata({
       type: "article",
       images: [
         {
-          url: post.coverImage || "",
+          url: post.coverImage ?? "",
           width: 1200,
           height: 630,
           alt: post.title,
@@ -114,14 +61,16 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.summary,
-      images: [post.coverImage || ""],
+      images: [post.coverImage ?? ""],
     },
 
-    authors: [{ name: post.author ? post.author.name : "Tushar Pankhaniya" }],
+    authors: [{ name: post.author?.name }],
   }
 }
 
-/* ---------------- PAGE ---------------- */
+/* ----------------------------------
+   PAGE
+---------------------------------- */
 
 export default async function BlogDetailPage({
   params,
@@ -133,7 +82,7 @@ export default async function BlogDetailPage({
 
   if (!data) notFound()
 
-  const { post, mdString } = data
+  const { post, content } = data
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -160,7 +109,7 @@ export default async function BlogDetailPage({
             </Link>
 
             <div className="flex flex-wrap gap-2 mb-5">
-              {post.tags.slice(0, 3).map((tag) => (
+              {post.tags.slice(0, 3).map(tag => (
                 <div
                   key={tag}
                   className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs uppercase"
@@ -181,6 +130,7 @@ export default async function BlogDetailPage({
             )}
 
             <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-white/70">
+
               <div className="flex items-center gap-2">
                 <img
                   src={post.author?.avatar ?? "/profile.jpg"}
@@ -198,11 +148,12 @@ export default async function BlogDetailPage({
 
               <div className="flex items-center gap-2">
                 <Eye className="w-4 h-4" />
-                {readingDuration(mdString, {
+                {readingDuration(content, {
                   wordsPerMinute: 200,
                   emoji: false,
                 })}
               </div>
+
             </div>
           </div>
         </div>
@@ -212,9 +163,8 @@ export default async function BlogDetailPage({
       <div className="container mx-auto max-w-4xl px-3 sm:px-4 py-12 md:py-16 relative">
         <BgGradient />
 
-        {/* Blog content */}
         <article className="max-w-none pt-6">
-          <MarkdownContent content={mdString} />
+          <MarkdownContent content={content} />
         </article>
       </div>
 

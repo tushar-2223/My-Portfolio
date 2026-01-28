@@ -11,8 +11,16 @@ type Props = {
 }
 
 export function BlogCard({ post }: Props) {
+
+  const encodedPost = encodeURIComponent(JSON.stringify(post))
+
   return (
-    <Link href={`/blog/${post.slug}`}>
+    <Link
+     href={{
+        pathname: `/blog/${post.slug}`,
+        query: { post: encodedPost },
+      }}
+    >
       <CardWithCorners className="group hover:scale-105 transition-all cursor-pointer">
 
         <div className="aspect-video overflow-hidden mb-4 -mx-6 -mt-6">
