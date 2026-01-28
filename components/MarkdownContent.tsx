@@ -267,7 +267,7 @@ function Paragraph({ children }: { children?: React.ReactNode }) {
 // Blockquote component
 function Blockquote({ children }: { children?: React.ReactNode }) {
     return (
-        <blockquote className="border-l-4 border-purple-500 pl-4 my-6 italic text-[17px] md:text-lg text-white/70 bg-white/5 py-4 pr-4 rounded-r-lg">
+        <blockquote className="border-l-4 border-purple-500 pl-4 my-6 italic text-[17px] md:text-lg text-white/70 bg-white/5 py-1 pr-4 rounded-r-lg">
             {children}
         </blockquote>
     );
