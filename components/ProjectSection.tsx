@@ -29,12 +29,14 @@ interface Project {
   forks?: number;
 }
 
-const ProjectSection = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
+const ProjectSection = ({ initialProjects }: { initialProjects?: Project[] }) => {
+  const [projects, setProjects] = useState<Project[]>(initialProjects || []);
+  const [loading, setLoading] = useState(!initialProjects);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (initialProjects) return;
+
     const fetchProjects = async () => {
       try {
         const response = await fetch('/api/github');
@@ -77,7 +79,7 @@ const ProjectSection = () => {
     };
 
     fetchProjects();
-  }, []);
+  }, [initialProjects]);
 
   return (
     <section id="projects" className="py-20  relative overflow-hidden">

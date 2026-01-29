@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req: Request) {
+  // Security check: Only allow requests with the correct API secret
+  const secret = req.headers.get("x-api-secret")
+  if (secret !== process.env.INTERNAL_API_SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
   const token = process.env.GITHUB_TOKEN;
   const targetRepoIds = [617347036, 564415983, 848912262, 1141031041,1141031572 ];
 

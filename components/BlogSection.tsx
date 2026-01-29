@@ -7,11 +7,13 @@ import { BlogPost } from "@/types/blog"
 import { BlogCardSkeleton } from "@/components/BlogCardSkeleton"
 import { BlogCard } from "./BlogCard"
 
-export function BlogSection() {
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
+export function BlogSection({ initialPosts }: { initialPosts?: BlogPost[] }) {
+  const [posts, setPosts] = useState<BlogPost[]>(initialPosts || [])
+  const [loading, setLoading] = useState(!initialPosts)
 
   useEffect(() => {
+    if (initialPosts) return;
+
     const load = async () => {
       try {
         const res = await fetch("/api/blog")
@@ -26,7 +28,7 @@ export function BlogSection() {
     }
 
     load()
-  }, [])
+  }, [initialPosts])
 
   return (
     <section id="blog" className="py-20 bg-black">

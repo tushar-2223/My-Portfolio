@@ -18,6 +18,9 @@ type ApiResponse = {
 async function getBlogData(slug: string): Promise<ApiResponse | null> {
   const res = await fetch(`${SITE_URL}/api/blog/${slug}`, {
     next: { revalidate: 3600 },
+    headers: {
+      "x-api-secret": process.env.INTERNAL_API_SECRET || "",
+    },
   })
 
   if (!res.ok) return null

@@ -7,13 +7,16 @@ import BlogSearch from "./search"
 import { SITE_URL } from "@/lib/utils"
 
 async function getPosts() {
-  const res = await fetch(`${SITE_URL}/api/blog`, {
-    cache: "force-cache",
-  })
+    const res = await fetch(`${SITE_URL}/api/blog`, {
+        cache: "force-cache",
+        headers: {
+            "x-api-secret": process.env.INTERNAL_API_SECRET || "",
+        },
+    })
 
-  if (!res.ok) return []
+    if (!res.ok) return []
 
-  return res.json() as Promise<BlogPost[]>
+    return res.json() as Promise<BlogPost[]>
 }
 
 export default async function BlogListPage() {
