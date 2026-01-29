@@ -65,15 +65,22 @@ function CustomLink({
     );
 }
 
-// Rounded Image Component
+// Rounded Image Component with Caption
 function RoundedImage({ src, alt, ...props }: { src?: string; alt?: string }) {
     return (
-        <img
-            src={src}
-            alt={alt || ""}
-            className="rounded-xl my-6 w-full max-w-full"
-            {...props}
-        />
+        <figure className="my-8 w-full">
+            <img
+                src={src}
+                alt={alt || ""}
+                className="rounded-xl w-full max-w-full"
+                {...props}
+            />
+            {alt && (
+                <figcaption className="mt-3 text-center text-sm text-white/50 italic">
+                    {alt}
+                </figcaption>
+            )}
+        </figure>
     );
 }
 
@@ -113,7 +120,7 @@ function CodeBlock({
     if (!isMultiLine) {
         return (
             <code
-               className="bg-white/10 text-pink-400 px-1.5 py-0.5 rounded text-[15px] font-mono"
+                className="bg-white/10 text-pink-400 px-1.5 py-0.5 rounded text-[15px] font-mono"
                 suppressHydrationWarning
                 dangerouslySetInnerHTML={{ __html: codeHTML }}
                 {...props}

@@ -17,7 +17,7 @@ type ApiResponse = {
 
 async function getBlogData(slug: string): Promise<ApiResponse | null> {
   const res = await fetch(`${SITE_URL}/api/blog/${slug}`, {
-    cache: "force-cache",
+    next: { revalidate: 3600 },
   })
 
   if (!res.ok) return null
