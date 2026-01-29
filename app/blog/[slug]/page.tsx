@@ -99,6 +99,12 @@ export default async function BlogDetailPage({
         </div>
       </div>
 
+
+      {/* DIVIDER */}
+      <div className="max-w-4xl mx-auto px-4 py-4">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      </div>
+
       {/* CONTENT */}
       <div className="max-w-4xl mx-auto px-4 pt-4 pb-16 relative">
         <BgGradient />
