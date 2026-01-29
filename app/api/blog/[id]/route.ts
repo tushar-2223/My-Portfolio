@@ -46,7 +46,9 @@ export async function GET(
     }
 
     const mdBlocks = await n2m.pageToMarkdown(page.id)
-    const mdString = n2m.toMarkdownString(mdBlocks)
+    const mdString = await n2m.toMarkdownString(mdBlocks)
+
+    console.log("Fetched post title:", post.title)
 
     return NextResponse.json({
       post,

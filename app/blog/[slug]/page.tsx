@@ -63,7 +63,7 @@ export default async function BlogDetailPage({
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
       {/* HERO */}
-      <div className="relative min-h-[50vh] flex justify-end">
+      <div className="relative min-h-[60vh] flex flex-col justify-end pb-12">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${post.coverImage})` }}
@@ -72,7 +72,7 @@ export default async function BlogDetailPage({
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
         </div>
 
-        <div className="relative z-10 px-4 md:p-16 max-w-4xl mx-auto w-full">
+        <div className="relative z-10 px-4 max-w-4xl mx-auto w-full">
 
           <Link href="/blog" className="flex items-center gap-2 text-white/70 mb-5">
             <ArrowLeft className="w-4 h-4" />
@@ -92,7 +92,7 @@ export default async function BlogDetailPage({
 
             <span className="flex gap-1 items-center">
               <Eye className="w-4 h-4" />
-              {readingDuration(content)}
+              {readingDuration(content || "")}
             </span>
 
           </div>

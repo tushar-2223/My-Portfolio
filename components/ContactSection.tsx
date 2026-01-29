@@ -80,7 +80,7 @@ export const ContactSection = () => {
             Get In Touch
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind? Let's work together to bring your ideas to life.
+            If you have any queries regarding my academic projects or would like to discuss them with me, please feel free to reach out!
           </p>
         </div>
 
@@ -208,7 +208,7 @@ export const ContactSection = () => {
                     type="text"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Project Inquiry"
+                    placeholder="Academic Project Inquiry"
                     className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-[#ffd074] focus:ring-[#ffd074]/20"
                     required
                     disabled={isSubmitting}
@@ -224,7 +224,7 @@ export const ContactSection = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell me about your project..."
+                    placeholder="Tell me about your query or project..."
                     rows={5}
                     className="bg-white/5 border-white/20 text-white placeholder:text-white/40 focus:border-[#b087ff] focus:ring-[#b087ff]/20 resize-none"
                     required
