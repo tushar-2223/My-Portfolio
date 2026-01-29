@@ -29,7 +29,7 @@ export function BlogSection() {
   }, [])
 
   return (
-    <section id="blog" className="py-20 px-6 bg-black">
+    <section id="blog" className="py-20 bg-black">
       <div className="container mx-auto max-w-6xl">
 
         {/* Header */}
