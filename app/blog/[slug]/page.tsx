@@ -63,7 +63,7 @@ export default async function BlogDetailPage({
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
       {/* HERO */}
-      <div className="relative min-h-[60vh] flex flex-col justify-end pb-12">
+      <div className="relative min-h-[60vh] flex flex-col justify-end pb-8">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${post.coverImage})` }}
@@ -100,10 +100,10 @@ export default async function BlogDetailPage({
       </div>
 
       {/* CONTENT */}
-      <div className="max-w-4xl mx-auto px-4 py-16 relative">
+      <div className="max-w-4xl mx-auto px-4 pt-4 pb-16 relative">
         <BgGradient />
 
-        <article className="max-w-none pt-6">
+        <article className="max-w-none">
           <MarkdownContent content={content} />
         </article>
       </div>
