@@ -1,36 +1,23 @@
 import { NextResponse } from "next/server"
 import { Client } from "@notionhq/client"
+import { NotionToMarkdown } from "notion-to-md"
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
-const DATABASE_ID = process.env.NOTION_DATABASE_ID!
+const n2m = new NotionToMarkdown({ notionClient: notion })
 
 export async function GET(
   req: Request,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { slug } = await params
+  const { id } = await params
 
   try {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      filter: {
-        property: "Status",
-        status: { equals: "Done" },
-      },
+    const page: any = await notion.pages.retrieve({
+      page_id: id,
     })
-
-    const page = response.results.find((p: any) => {
-      const pageSlug =
-        p.properties.Slug?.rich_text?.[0]?.plain_text ?? p.id
-      return pageSlug === slug
-    }) as any
-
-    if (!page) {
-      return NextResponse.json({ error: "Not found" }, { status: 404 })
-    }
 
     const props = page.properties
 
@@ -46,8 +33,8 @@ export async function GET(
 
     const post = {
       id: page.id,
+      slug: page.id,
       title: props.Name?.title?.[0]?.plain_text ?? "Untitled",
-      slug,
       summary: props.Summary?.rich_text?.[0]?.plain_text ?? "",
       tags: props.Tags?.multi_select?.map((t: any) => t.name) ?? [],
       date: page.created_time,
@@ -58,20 +45,18 @@ export async function GET(
       },
     }
 
-    // ✅ YOUR BLOCK FETCH (as requested)
-    const blocks = await notion.blocks.children.list({
-      block_id: page.id,
-    })
+    const mdBlocks = await n2m.pageToMarkdown(page.id)
+    const mdString = n2m.toMarkdownString(mdBlocks)
 
     return NextResponse.json({
       post,
-      blocks: blocks.results,
+      content: mdString.parent,
     })
-  } catch (err: any) {
-    console.error("Blog detail API error:", err)
+  } catch (error: any) {
+    console.error("Detail API error:", error)
     return NextResponse.json(
-      { error: "Failed to fetch blog" },
-      { status: 500 }
+      { error: "Blog not found" },
+      { status: 404 }
     )
   }
 }

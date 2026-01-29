@@ -7,20 +7,21 @@ import { formatDate } from "@/lib/formatDate"
 import { BgGradient } from "@/components/ui/bg-gradient"
 import { ArrowLeft, Clock, Eye } from "lucide-react"
 import readingDuration from "reading-duration"
-import { MarkdownContent } from "@/components/MarkdownContent"
 import { SITE_URL } from "@/lib/utils"
+import MarkdownContent from "@/components/MarkdownContent"
 
-async function getBlogData(slug: string) {
+type ApiResponse = {
+  post: BlogPost
+  content: string
+}
+
+async function getBlogData(slug: string): Promise<ApiResponse | null> {
   const res = await fetch(`${SITE_URL}/api/blog/${slug}`, {
     cache: "force-cache",
   })
 
   if (!res.ok) return null
-
-  return res.json() as Promise<{
-    post: BlogPost
-    content: string
-  }>
+  return res.json()
 }
 
 export async function generateMetadata({
@@ -34,43 +35,17 @@ export async function generateMetadata({
   if (!data) return { title: "Blog Not Found" }
 
   const { post } = data
-  const blogUrl = `${SITE_URL}/blog/${post.slug}`
 
   return {
     title: post.title,
     description: post.summary,
-
-    alternates: { canonical: blogUrl },
-
     openGraph: {
       title: post.title,
       description: post.summary,
-      url: blogUrl,
-      type: "article",
-      images: [
-        {
-          url: post.coverImage ?? "",
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
+      images: [{ url: post.coverImage ?? "" }],
     },
-
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.summary,
-      images: [post.coverImage ?? ""],
-    },
-
-    authors: [{ name: post.author?.name }],
   }
 }
-
-/* ----------------------------------
-   PAGE
----------------------------------- */
 
 export default async function BlogDetailPage({
   params,
@@ -88,7 +63,7 @@ export default async function BlogDetailPage({
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
       {/* HERO */}
-      <div className="relative w-full min-h-[45vh] md:min-h-[50vh] flex flex-col justify-end overflow-hidden">
+      <div className="relative min-h-[50vh] flex justify-end">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${post.coverImage})` }}
@@ -97,77 +72,41 @@ export default async function BlogDetailPage({
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
         </div>
 
-        <div className="relative z-20 px-4 sm:px-6 md:p-16 mt-24 md:mt-32">
-          <div className="container mx-auto max-w-4xl">
+        <div className="relative z-10 px-4 md:p-16 max-w-4xl mx-auto w-full">
 
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-5"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Blog
-            </Link>
+          <Link href="/blog" className="flex items-center gap-2 text-white/70 mb-5">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Blog
+          </Link>
 
-            <div className="flex flex-wrap gap-2 mb-5">
-              {post.tags.slice(0, 3).map(tag => (
-                <div
-                  key={tag}
-                  className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs uppercase"
-                >
-                  #{tag}
-                </div>
-              ))}
-            </div>
+          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-5">
-              {post.title}
-            </h1>
+          <p className="text-white/70 mb-6">{post.summary}</p>
 
-            {post.summary && (
-              <p className="hidden md:block text-lg text-white/80 max-w-2xl mb-8">
-                {post.summary}
-              </p>
-            )}
+          <div className="flex gap-4 text-sm text-white/60">
 
-            <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-white/70">
+            <span className="flex gap-1 items-center">
+              <Clock className="w-4 h-4" />
+              {formatDate(post.date)}
+            </span>
 
-              <div className="flex items-center gap-2">
-                <img
-                  src={post.author?.avatar ?? "/profile.jpg"}
-                  className="w-6 h-6 rounded-full border border-white/20"
-                />
-                <span className="text-white font-medium">
-                  {post.author?.name}
-                </span>
-              </div>
+            <span className="flex gap-1 items-center">
+              <Eye className="w-4 h-4" />
+              {readingDuration(content)}
+            </span>
 
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                {formatDate(post.date)}
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Eye className="w-4 h-4" />
-                {readingDuration(content, {
-                  wordsPerMinute: 200,
-                  emoji: false,
-                })}
-              </div>
-
-            </div>
           </div>
         </div>
       </div>
 
       {/* CONTENT */}
-      <div className="container mx-auto max-w-4xl px-3 sm:px-4 py-12 md:py-16 relative">
+      <div className="max-w-4xl mx-auto px-4 py-16 relative">
         <BgGradient />
 
         <article className="max-w-none pt-6">
           <MarkdownContent content={content} />
         </article>
       </div>
-
     </div>
   )
 }
