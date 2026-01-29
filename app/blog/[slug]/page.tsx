@@ -75,7 +75,7 @@ export default async function BlogDetailPage({
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
         </div>
 
-        <div className="relative z-10 px-4 max-w-4xl mx-auto w-full">
+        <div className="relative z-10 container mx-auto max-w-6xl">
 
           <Link href="/blog" className="flex items-center gap-2 text-white/70 mb-5">
             <ArrowLeft className="w-4 h-4" />
@@ -104,12 +104,12 @@ export default async function BlogDetailPage({
 
 
       {/* DIVIDER */}
-      <div className="max-w-4xl mx-auto px-4 py-4">
+      <div className="container mx-auto max-w-6xl py-4">
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       </div>
 
       {/* CONTENT */}
-      <div className="max-w-4xl mx-auto px-4 pt-4 pb-16 relative">
+      <div className="container mx-auto max-w-6xl pt-4 pb-16 relative">
         <BgGradient />
 
         <article className="max-w-none">

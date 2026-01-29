@@ -24,7 +24,7 @@ export default async function BlogListPage() {
 
     return (
         <div className="min-h-screen bg-black text-white pt-32 pb-20">
-            <div className="container mx-auto max-w-6xl px-4">
+            <div className="container mx-auto max-w-6xl">
 
                 <div className="text-center mb-16">
                     <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase tracking-tight">
