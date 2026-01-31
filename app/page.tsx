@@ -63,7 +63,6 @@ const Index = async () => {
       <TechStackSection />
       <ProjectSection initialProjects={projects} />
       <BlogSection initialPosts={blogs} />
-      <ContactSection />
     </div>
   )
 }
