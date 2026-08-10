@@ -25,7 +25,7 @@ export const Header = () => {
       setIsScrolled(window.scrollY > 50)
 
       // Track active section based on scroll position
-      const sections = ['about', 'experience', 'tech', 'projects', 'blog']
+      const sections = ['about', 'experience', 'tech', 'certifications', 'projects', 'blog']
       const scrollPosition = window.scrollY + 100 // Offset for better detection
 
       for (const section of sections) {
@@ -54,6 +54,7 @@ export const Header = () => {
     { name: "About", href: "/#about" },
     { name: "Experience", href: "/#experience" },
     { name: "Tech Stack", href: "/#tech" },
+    { name: "Certifications", href: "/#certifications" },
     { name: "Academic Projects", href: "/#projects" },
     { name: "Blogs", href: "/blog" },
   ]

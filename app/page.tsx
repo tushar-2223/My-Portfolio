@@ -5,6 +5,7 @@ import ProjectSection from "@/components/ProjectSection"
 import { TechStackSection } from "@/components/TechStackSection"
 import { AboutSection } from "@/components/AboutSection"
 import { ExperienceSection } from "@/components/ExperienceSection"
+import { CertificationsSection } from "@/components/CertificationsSection"
 import { BlogSection } from "@/components/BlogSection"
 
 import { SITE_URL } from "@/lib/utils"
@@ -61,6 +62,7 @@ const Index = async () => {
       <AboutSection />
       <ExperienceSection />
       <TechStackSection />
+      <CertificationsSection />
       <ProjectSection initialProjects={projects} />
       <BlogSection initialPosts={blogs} />
     </div>
